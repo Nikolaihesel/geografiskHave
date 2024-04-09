@@ -1,0 +1,23 @@
+@use "../../base/variables.scss" as *;
+@use "../../mixins/typography-mixins.scss" as t;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $prim-color;
+
+    h1 {
+        @include t.heading;
+        flex: 3;
+    }
+    div {
+        flex: 1;
+    }
+}

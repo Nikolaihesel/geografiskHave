@@ -1,0 +1,10 @@
+@use "../base/typography.scss" as t;
+@use "../base/variables.scss" as v;
+
+@mixin heading{
+    font-family: t.$font-ibm;  
+    font-size: t.$heading;
+    font-weight: t.$bold;
+    color: v.$neutral-tint-10;  
+}
+
