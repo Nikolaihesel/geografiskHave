@@ -1,0 +1,14 @@
+@import "../../base/typography.scss";
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    p {
+        text-align: center;
+        font-size: $paragraph;
+        font-weight: $semi-bold;
+    }
+}
