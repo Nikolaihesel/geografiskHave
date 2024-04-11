@@ -6,19 +6,62 @@
   box-sizing: border-box;
 }
 
-nav {
+.navContainer {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   background: #136031;
 }
-nav h1 {
+.navContainer h1 {
   font-family: "ibm plex serif", sans-serif;
   font-size: 20px;
   font-weight: 700;
   color: #FFF;
   flex: 3;
 }
-nav div {
+.navContainer div {
   flex: 1;
+  cursor: pointer;
+  margin: 0.7em 0;
+}
+
+.burger {
+  height: 3px;
+  width: 20px;
+  background: #000;
+  position: relative;
+}
+.burger::before, .burger::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 20px;
+  background: #000;
+  position: absolute;
+}
+.burger::before {
+  top: -6px;
+}
+.burger::after {
+  top: 6px;
+}
+
+.navMenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1em;
+  width: 100%;
+  background: yellow;
+}
+.navMenu ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.navMenu ul li {
+  list-style: none;
+  cursor: pointer;
 }/*# sourceMappingURL=nav.module.css.map */
