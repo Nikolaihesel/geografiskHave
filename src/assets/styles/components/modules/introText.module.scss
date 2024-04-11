@@ -1,0 +1,17 @@
+@import "../../base/typography.scss";
+
+.IntroText {
+    display: flex;
+    flex-direction: column;
+    
+    h1 {
+        font-family: $font-ibm;
+    }
+    
+    p {
+        font-family: $font-open-sans;
+        font-weight: $regular;
+        text-align: left;
+    }
+
+}

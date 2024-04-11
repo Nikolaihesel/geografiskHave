@@ -1,12 +1,19 @@
 @import "../../base/typography.scss";
 
-.card {
+.CarouselCard {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: 5px;
 
+    img {
+        width: 50vw;
+        height: 30vh;
+    }
     p {
+        font-family: $font-open-sans;
         text-align: center;
         font-size: $paragraph;
         font-weight: $semi-bold;

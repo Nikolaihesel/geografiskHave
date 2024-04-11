@@ -2,6 +2,9 @@ import React from 'react';
 import WintherImg from '../image/vinter-silhuet.jpg';
 import AsianFlower from '../image/asiatisk-blomst.png';
 
+// CSS modules
+import Style from "../assets/styles/components/modules/carousel.module.scss";
+
 //component
 import CarouselCard from '../Components/CarouselCard';
 const carouselData = {
@@ -26,7 +29,7 @@ const carouselData = {
 
 function Carousel() {
 	return (
-		<div>
+		<div className={Style.Carousel}>
 			{carouselData &&
 				carouselData.stories.map((card) => (
 					<CarouselCard
