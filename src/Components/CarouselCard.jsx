@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState} from 'react'
 // CSS module
 import Style from "../assets/styles/components/modules/carouselCard.module.scss";
 
@@ -12,4 +12,4 @@ function CarouselCard({StoryImg, ImgAlt, StoryTitle, }) {
   )
 }
 
-export default CarouselCard
+export default CarouselCard;

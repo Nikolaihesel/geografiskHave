@@ -1,6 +1,9 @@
 @import "../../base/typography.scss";
 
 .CarouselCard {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
     display: flex;
     flex-direction: column;
     justify-content: center;
