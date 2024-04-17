@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 // CSS modules
 import Style from '../assets/styles/components/modules/nav.module.scss';
@@ -20,7 +21,9 @@ function Nav() {
 			{nav && (
 				<div className={Style.navMenu}>
 					<ul>
-						<li>Home</li>
+						<NavLink path='map'>
+							<li> map</li>
+						</NavLink>
 						<li>About</li>
 						<li>Services</li>
 						<li>Contact</li>
