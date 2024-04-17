@@ -29,14 +29,14 @@
 .burger {
 	height: 3px;
 	width: 20px;
-	background: $neutral-tint-100;
 	position: relative;
+	background: $neutral-tint-100;
 
 	&::before,
 	&::after {
 		content: '';
 		position: absolute;
-		height: 3px;
+		min-height: 3px;
 		width: 20px;
 		background: $neutral-tint-100;
 		position: absolute;
@@ -50,6 +50,8 @@
 		top: 6px;
 	}
 }
+
+//popup
 
 .navMenu {
 	display: flex;

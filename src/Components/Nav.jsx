@@ -5,7 +5,7 @@ import Style from '../assets/styles/components/modules/nav.module.scss';
 function Nav() {
 	const [nav, setNav] = useState(false);
 	return (
-		<nav className={Style.nav}>
+		<nav>
 			<div className={Style.navContainer}>
 				<h1>Geografisk Have</h1>
 				<div className='ticket-icon'>1</div>
