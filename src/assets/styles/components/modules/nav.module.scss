@@ -16,7 +16,7 @@
 	background: $prim-color;
 
 	h1 {
-		@include t.heading;
+		@include t.heading($neutral-tint-10);
 		flex: 3;
 	}
 	div {

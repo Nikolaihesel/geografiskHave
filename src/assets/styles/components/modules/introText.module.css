@@ -6,9 +6,16 @@
 }
 .IntroText h1 {
   font-family: "ibm plex serif", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin: 1em 0;
 }
 .IntroText p {
   font-family: "open sans", sans-serif;
+  font-size: 14px;
   font-weight: 400;
-  text-align: left;
+  color: #000;
+  margin: 1.5em;
 }/*# sourceMappingURL=introText.module.css.map */

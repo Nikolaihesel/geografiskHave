@@ -1,20 +1,42 @@
-@import "../../base/typography.scss";
+@use '../../base/typography.scss' as *;
 
 .Carousel {
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 5px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	padding: 5px;
+	overflow: auto;
 
-    .CarouselContainer {
-        display: flex;
-        flex-direction: row;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-    }
+	.CarouselContainer {
+		display: flex;
+		flex-direction: row;
+		overflow-x: auto;
+		scroll-snap-type: x none;
+		-webkit-overflow-scrolling: touch;
+		scroll-behavior: smooth;
+		gap: 5em;
+		width: 100%;
+		padding: 0 5em;
+	}
+}
+
+.DotNavigation {
+	display: flex;
+
+	align-self: center;
+}
+
+.Dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: gray;
+	margin: 0 5px;
+	cursor: pointer;
+}
+
+.Active {
+	background-color: blue;
 }

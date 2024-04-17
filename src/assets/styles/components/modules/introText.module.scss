@@ -1,16 +1,18 @@
-@import '../../base/typography.scss';
-
+@use '../../mixins/typography-mixins.scss' as t;
+@use '../../base/variables.scss' as v;
 .IntroText {
 	display: flex;
 	flex-direction: column;
 
 	h1 {
-		font-family: $font-ibm;
+		@include t.heading(v.$neutral-tint-100);
+		text-align: center;
+		margin: 1em 0;
 	}
 
 	p {
-		font-family: $font-open-sans;
-		font-weight: $regular;
-		text-align: left;
+		@include t.paragraph;
+
+		margin: 1.5em;
 	}
 }

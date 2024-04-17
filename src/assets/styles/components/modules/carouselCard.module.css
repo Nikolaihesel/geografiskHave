@@ -9,15 +9,40 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 5px;
+  border-radius: 2px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1803921569);
+  margin: 2em 0;
 }
 .CarouselCard img {
-  width: 50vw;
-  height: 30vh;
+  width: 210px;
 }
 .CarouselCard p {
   font-family: "open sans", sans-serif;
-  text-align: center;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
+  color: #000;
+  margin: 1em 0;
+}
+.CarouselCard button {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  border: none;
+  background: orange;
+  transform: translateY(45%);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1803921569);
+  position: relative;
+}
+.CarouselCard button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-45%, -50%);
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 25px solid white;
+  background-size: contain;
 }/*# sourceMappingURL=carouselCard.module.css.map */

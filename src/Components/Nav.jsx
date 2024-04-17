@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 // CSS modules
 import Style from '../assets/styles/components/modules/nav.module.scss';
 
