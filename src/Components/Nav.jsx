@@ -21,10 +21,17 @@ function Nav() {
 			{nav && (
 				<div className={Style.navMenu}>
 					<ul>
-						<NavLink path='map'>
+						<NavLink
+							to='map'
+							onClick={() => setNav(false)}>
 							<li> map</li>
 						</NavLink>
-						<li>About</li>
+						<NavLink
+							to='/'
+							onClick={() => setNav(false)}>
+							<li> Home</li>
+						</NavLink>
+
 						<li>Services</li>
 						<li>Contact</li>
 					</ul>

@@ -13,18 +13,18 @@ function MapView() {
 			}
 		);
 
-		// Clean up the watcher when the component unmounts
 		return () => {
 			navigator.geolocation.clearWatch(watchId);
 		};
-	}, []); // Run once on component mount
+	}, []);
 
 	console.log('userLocation:', userLocation);
 	return (
+		// use draggable marker in cms
 		<div style={{ height: '90vh', width: '100vw' }}>
 			<MapContainer
 				center={[55.4721, 9.4929]}
-				zoom={16}
+				zoom={17}
 				style={{ height: '100%', width: '100%' }}>
 				<TileLayer
 					url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'

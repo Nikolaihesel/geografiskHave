@@ -43,7 +43,6 @@ function Carousel() {
 			const cardWidth = container.scrollWidth / carouselData.stories.length;
 			const middle = containerWidth / 2;
 
-			// Calculate the index of the card closest to the middle of the visible area
 			const targetIndex = Math.floor(
 				(container.scrollLeft + middle) / cardWidth
 			);
