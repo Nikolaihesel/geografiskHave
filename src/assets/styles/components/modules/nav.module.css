@@ -13,6 +13,7 @@
   align-items: center;
   flex-wrap: no-wrap;
   background: #136031;
+  min-height: 50px;
 }
 .navContainer h1 {
   font-family: "ibm plex serif", sans-serif;
@@ -21,11 +22,12 @@
   color: #fff;
   flex: 3;
   margin: 0 0.5em;
+  height: 100%;
+  white-space: nowrap;
 }
 .navContainer div {
   flex: 1;
   cursor: pointer;
-  margin: 0.7em 0;
 }
 
 .burger {

@@ -24,12 +24,15 @@ function MapView() {
 		<div style={{ height: '90vh', width: '100vw' }}>
 			<MapContainer
 				center={[55.4721, 9.4929]}
-				zoom={17}
+				zoom={16}
 				style={{ height: '100%', width: '100%' }}>
 				<TileLayer
 					url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 				/>
+				<Marker position={[55.4721, 9.4929]}>
+					<Popup>Geografisk Have</Popup>
+				</Marker>
 
 				<Marker position={userLocation}>
 					<Popup>Your location</Popup>

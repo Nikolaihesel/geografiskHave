@@ -14,16 +14,18 @@
 	align-items: center;
 	flex-wrap: no-wrap;
 	background: $prim-color;
+	min-height: 50px;
 
 	h1 {
 		@include t.heading($neutral-tint-10);
 		flex: 3;
 		margin: 0 0.5em;
+		height: 100%;
+		white-space: nowrap;
 	}
 	div {
 		flex: 1;
 		cursor: pointer;
-		margin: 0.7em 0;
 	}
 }
 
