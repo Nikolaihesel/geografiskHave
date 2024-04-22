@@ -5,6 +5,9 @@ import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
 import MainView from './Views/MainView';
 import Nav from './Components/Nav';
 import MapView from './Views/MapView';
+import FetchTest from './Views/FetchTest';
+import GetTest from './Views/GetTest';
+import AuthTest from './Views/AuthTest';
 
 function App() {
 	return (
@@ -19,6 +22,18 @@ function App() {
 					<Route
 						path='map'
 						element={<MapView />}
+					/>
+					<Route
+						path='/fetchtest'
+						element={<FetchTest />}
+					/>
+					<Route
+						path='gettest'
+						element={<GetTest />}
+					/>
+					<Route
+						path='authTest'
+						element={<AuthTest />}
 					/>
 				</Routes>
 			</BrowserRouter>
