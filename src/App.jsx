@@ -24,7 +24,7 @@ function App() {
 						element={<MapView />}
 					/>
 					<Route
-						path='/fetchtest'
+						path='fetchtest'
 						element={<FetchTest />}
 					/>
 					<Route
