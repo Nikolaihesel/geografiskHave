@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
+
+import { DraggableMenu } from '../Components/DraggableMenu';
 function MapView() {
 	const [userLocation, setUserLocation] = useState([55.471, 9.4868]);
 
@@ -38,6 +40,7 @@ function MapView() {
 					<Popup>Your location</Popup>
 				</Marker>
 			</MapContainer>
+			<DraggableMenu />
 		</div>
 	);
 }
