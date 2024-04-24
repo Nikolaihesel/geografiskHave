@@ -21,7 +21,7 @@ function DraggableMenu() {
 				<div
 					style={{
 						position: 'absolute',
-						bottom: '-70vh',
+						bottom: '-73vh',
 						left: '0',
 						transform: `translate ${footerPosition.y}px)`,
 						zIndex: '1000',
