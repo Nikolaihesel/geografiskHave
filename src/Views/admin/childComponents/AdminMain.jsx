@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { db } from '../../../config/firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 
 function AdminMain() {
 	const [stories, setStories] = useState([]);
+	const [clickedIndex, setClickedIndex] = useState(-1);
+	const [storyId, setStoryId] = useState('');
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -23,18 +25,44 @@ function AdminMain() {
 		fetchData();
 	}, []);
 
+	const handleImageClick = (index) => {
+		setClickedIndex(index === clickedIndex ? -1 : index);
+		setStoryId(stories[index]);
+	};
+	const handleDelete = async (id) => {
+		try {
+			await deleteDoc(doc(db, 'stories', id));
+			setStories((prevStories) =>
+				prevStories.filter((story) => story.id !== id)
+			);
+			console.log('Document deleted successfully!');
+		} catch (error) {
+			console.error('Error deleting document:', error);
+		}
+	};
+
 	return (
 		<div>
 			<h1>Admin Main</h1>
 			<p>Her kan du administrere stories</p>
 
-			{stories.map((story) => (
-				<div key={story.id}>
+			<button onClick={() => handleDelete(storyId.id)}>Delete post</button>
+
+			{stories.map((story, index) => (
+				<div
+					onClick={() => handleImageClick(index)}
+					style={{
+						background: index === clickedIndex ? 'lightgrey' : 'grey',
+						padding: '1em',
+						borderRadius: '6px',
+						margin: '1em',
+					}}
+					key={story.id}>
 					<p>{story.title}</p>
 					<NavLink to={`/updatestory/${story.id}`}>Update</NavLink>
-					{/* NavLink to update route with selected story ID */}
 				</div>
 			))}
+			{storyId && <p>{storyId.id}</p>}
 		</div>
 	);
 }

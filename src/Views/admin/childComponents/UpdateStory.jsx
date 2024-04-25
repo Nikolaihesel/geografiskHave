@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+
+import { useParams, NavLink } from 'react-router-dom';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 

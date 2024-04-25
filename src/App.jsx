@@ -6,7 +6,7 @@ import MainView from './Views/MainView';
 import Nav from './Components/Nav';
 import MapView from './Views/MapView';
 import FetchTest from './Views/FetchTest';
-import GetTest from './Views/GetTest';
+
 import AuthTest from './Views/AuthTest';
 import Admin from './Views/admin/Admin';
 import AddStory from './Views/admin/childComponents/AddStory';
@@ -31,10 +31,7 @@ function App() {
 						path='fetchtest'
 						element={<FetchTest />}
 					/>
-					<Route
-						path='gettest'
-						element={<GetTest />}
-					/>
+
 					<Route
 						path='authTest'
 						element={<AuthTest />}

@@ -12,8 +12,6 @@ function Admin() {
 				<NavLink to='addstory'>
 					<button>Add Story</button>
 				</NavLink>
-
-				<button>Delete Story</button>
 			</div>
 			<Outlet />
 		</div>
