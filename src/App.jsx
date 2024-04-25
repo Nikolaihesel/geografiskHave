@@ -8,6 +8,7 @@ import MapView from './Views/MapView';
 import FetchTest from './Views/FetchTest';
 import GetTest from './Views/GetTest';
 import AuthTest from './Views/AuthTest';
+import UpdateTest from './Views/UpdateTest';
 
 function App() {
 	return (
@@ -34,6 +35,10 @@ function App() {
 					<Route
 						path='authTest'
 						element={<AuthTest />}
+					/>
+					<Route
+						path='updateTest'
+						element={<UpdateTest />}
 					/>
 				</Routes>
 			</BrowserRouter>
