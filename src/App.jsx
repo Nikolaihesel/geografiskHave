@@ -8,6 +8,10 @@ import MapView from './Views/MapView';
 import FetchTest from './Views/FetchTest';
 import GetTest from './Views/GetTest';
 import AuthTest from './Views/AuthTest';
+import Admin from './Views/admin/Admin';
+import AddStory from './Views/admin/childComponents/AddStory';
+import UpdateStory from './Views/admin/childComponents/UpdateStory';
+import AdminMain from './Views/admin/childComponents/AdminMain';
 
 function App() {
 	return (
@@ -35,6 +39,22 @@ function App() {
 						path='authTest'
 						element={<AuthTest />}
 					/>
+					<Route
+						path='/'
+						element={<Admin />}>
+						<Route
+							path='/addstory'
+							element={<AddStory />}
+						/>
+						<Route
+							path='/updatestory/:id'
+							element={<UpdateStory />}
+						/>
+						<Route
+							path='/admin'
+							element={<AdminMain />}
+						/>
+					</Route>
 				</Routes>
 			</BrowserRouter>
 		</main>
