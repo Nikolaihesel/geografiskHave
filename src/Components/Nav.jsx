@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import ticketIcon from '../image/ticket-icon.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 // CSS modules
 import Style from '../assets/styles/components/modules/nav.module.scss';
@@ -10,8 +13,12 @@ function Nav() {
 		<nav>
 			<div className={Style.navContainer}>
 				<h1>Geografisk Have</h1>
-				<div className='ticket-icon'>1</div>
-				<div className='search-icon'>2</div>
+				<div className={Style.ticketIcon}>
+  					<img src={ticketIcon} alt="Ticket Icon" />
+				</div>
+				<div className='search-icon'>
+  					<FontAwesomeIcon icon={faSearch} />
+				</div>
 				<div
 					onClick={() => setNav(!nav)}
 					className='burger-menu'>
