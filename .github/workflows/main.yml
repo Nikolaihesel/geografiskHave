@@ -8,7 +8,13 @@ jobs:
     steps:
       - name: Greet on pull request
         if: github.event_name == 'pull_request'
-        uses: actions/hello-world-javascript-action@v1.1
+        uses: actions/github-script@v6
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MESSAGE: "Hello 👋, Thank you for your contribution!, this is the awsome Geographic Garden of Kolding"
+          script: |
+            const message = "Hello 👋, Thank you for your contribution!"
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            })
