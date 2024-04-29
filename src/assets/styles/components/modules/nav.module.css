@@ -30,22 +30,26 @@
   cursor: pointer;
 }
 
-.ticketIcon {
+.ticketIconYellow {
   background: #fee174;
+}
+
+svg {
+  color: white;
 }
 
 .burger {
   height: 3px;
   width: 20px;
   position: relative;
-  background: #000;
+  background: white;
 }
 .burger::before, .burger::after {
   content: "";
   position: absolute;
   min-height: 3px;
   width: 20px;
-  background: #000;
+  background: white;
   position: absolute;
 }
 .burger::before {
@@ -62,7 +66,6 @@
   align-items: flex-start;
   padding: 1em;
   width: 100%;
-  background: yellow;
 }
 .navMenu ul {
   display: flex;

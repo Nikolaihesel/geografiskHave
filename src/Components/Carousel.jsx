@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import WintherImg from '../image/vinter-silhuet.jpg';
 import AsianFlower from '../image/asiatisk-blomst.png';
+import HistoryImg from '../image/geografisk-have-historien.png';
 
 // CSS modules
 import Style from '../assets/styles/components/modules/carousel.module.scss';
@@ -12,13 +13,13 @@ const carouselData = {
 	stories: [
 		{
 			id: 1,
-			title: 'Vinter Silhuetter',
-			img: WintherImg,
+			title: 'Geografisk haves historier',
+			img: HistoryImg,
 		},
 		{
 			id: 2,
-			title: 'Geografiskhaves historie',
-			img: AsianFlower,
+			title: 'Vinter Silhuetter',
+			img: WintherImg,
 		},
 		{
 			id: 3,

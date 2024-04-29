@@ -14,7 +14,8 @@
   margin: 2em 0;
 }
 .CarouselCard img {
-  width: 210px;
+  width: 250px;
+  height: 280px;
 }
 .CarouselCard p {
   font-family: "open sans", sans-serif;

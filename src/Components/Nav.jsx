@@ -14,7 +14,7 @@ function Nav() {
 			<div className={Style.navContainer}>
 				<h1>Geografisk Have</h1>
 				<div className={Style.ticketIcon}>
-  					<img src={ticketIcon} alt="Ticket Icon" />
+  					<img className={Style.ticketIconYellow} src={ticketIcon} alt="Ticket Icon" />
 				</div>
 				<div className='search-icon'>
   					<FontAwesomeIcon icon={faSearch} />

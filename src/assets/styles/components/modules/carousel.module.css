@@ -16,9 +16,9 @@
   scroll-snap-type: x none;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
-  gap: 5em;
+  gap: 3em;
   width: 100%;
-  padding: 0 5em;
+  padding: 0 6em;
   scrollbar-width: none;
   overflow: -moz-scrollbars-none;
 }
@@ -28,6 +28,7 @@
 
 .DotNavigation {
   display: flex;
+  padding-top: 20px;
   align-self: center;
 }
 
