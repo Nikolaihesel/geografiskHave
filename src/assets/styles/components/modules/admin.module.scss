@@ -1,0 +1,26 @@
+@use '../../base/variables.scss' as *;
+@use '../../mixins/typography-mixins.scss' as t;
+@use '../modules/buttons' as b;
+
+.btnContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.adminPanel{
+    @include b.button;
+    color: $neutral-tint-100;
+    background: $accent-color;
+}
+
+.addStory {
+    @include b.button;
+    color: $neutral-tint-10;
+    background: $prim-color;
+}
+
+.deleteButton {
+    @include b.button;
+    color: $neutral-tint-100;
+    background: $interactive-color;
+}

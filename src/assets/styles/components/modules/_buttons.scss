@@ -24,3 +24,14 @@
 		background-size: contain;
 	}
 }
+
+@mixin button {
+	margin: 1vw;
+	height: 5vh;
+	width: 20vw;
+	border-radius: 5%;
+	border: none;
+	position: relative;
+	font-size: 2vw;
+	font-weight: bold;
+}

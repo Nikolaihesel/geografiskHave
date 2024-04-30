@@ -30,8 +30,16 @@
   cursor: pointer;
 }
 
-.ticketIconYellow {
+.ticketIcon {
+  background-color: #fee174;
+  margin: 0 2vw 0 2vw;
+  max-width: 16vw;
+  text-align: center;
+}
+.ticketIcon .ticketIconYellow {
   background: #fee174;
+  height: 8vh;
+  padding: 1vw;
 }
 
 svg {
