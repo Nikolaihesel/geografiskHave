@@ -29,9 +29,21 @@
 	}
 }
 
-.ticketIconYellow {
+.ticketIcon {
+	background-color: $accent-color;
+	margin: 0 2vw 0 2vw;
+	max-width: 16vw;
+	text-align: center;
+
+	.ticketIconYellow {
 	background: $accent-color;
+	height: 8vh;
+	padding: 1vw;
+
 }
+}
+
+
 
 svg {
 	color: white;
