@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import { useParams, NavLink } from 'react-router-dom';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
@@ -13,6 +12,7 @@ function UpdateStory() {
 	const [longitude, setLongitude] = useState('');
 	const [latitude, setLatitude] = useState('');
 	const [markerText, setMarkerText] = useState('');
+	const [markerLocations, setMarkerLocations] = useState([]);
 
 	useEffect(() => {
 		const fetchStory = async () => {
@@ -28,6 +28,7 @@ function UpdateStory() {
 					setMarkerText(data.markerText || '');
 					setAudio(data.audio || '');
 					setImage(data.image || '');
+					setMarkerLocations(data.markerLocations || []);
 				} else {
 					console.log('No such document!');
 				}
@@ -38,6 +39,12 @@ function UpdateStory() {
 
 		fetchStory();
 	}, [id]);
+
+	const handleMarkerChange = (index, key, value) => {
+		const updatedLocations = [...markerLocations];
+		updatedLocations[index][key] = value;
+		setMarkerLocations(updatedLocations);
+	};
 
 	const submitStory = async (e) => {
 		e.preventDefault();
@@ -50,6 +57,7 @@ function UpdateStory() {
 				longitude: longitude,
 				latitude: latitude,
 				markerText: markerText,
+				markerLocations: markerLocations,
 			};
 			await updateDoc(doc(db, 'stories', id), dataToUpdate);
 			console.log('Document updated successfully!');
@@ -58,14 +66,34 @@ function UpdateStory() {
 		}
 	};
 
+	const renderMarkerInputs = () => {
+		return markerLocations.map((location, index) => (
+			<div key={index}>
+				<label>Longitude</label>
+				<input
+					type='text'
+					value={location.lng}
+					onChange={(e) => handleMarkerChange(index, 'lng', e.target.value)}
+				/>
+				<label>Latitude</label>
+				<input
+					type='text'
+					value={location.lat}
+					onChange={(e) => handleMarkerChange(index, 'lat', e.target.value)}
+				/>
+			</div>
+		));
+	};
+
 	return (
 		<div>
 			<NavLink to='/admin'>
 				<button>X</button>
 			</NavLink>
 			<form onSubmit={submitStory}>
+				{/* Form inputs */}
 				<div className='form-inner-wrap-left'>
-					<div className='inout-container'>
+					<div className='input-container'>
 						<label>Title</label>
 						<input
 							type='text'
@@ -74,35 +102,33 @@ function UpdateStory() {
 							onChange={(e) => setTitle(e.target.value)}
 						/>
 					</div>
-					<div className='inout-container'>
-						<label>Beskrivelse</label>
+					<div className='input-container'>
+						<label>Description</label>
 						<input
 							type='text'
-							placeholder='Beskrivelse'
+							placeholder='Description'
 							value={description}
 							onChange={(e) => setDescription(e.target.value)}
 						/>
 					</div>
-					<div className='inout-container'>
+					<div className='input-container'>
 						<label>Upload Image</label>
 						<input
 							type='file'
-							placeholder='Upload Image'
 							onChange={(e) => setImage(e.target.files[0])}
 						/>
 					</div>
 				</div>
 				<div className='form-inner-wrap-middle'>
-					<label>Lydfiler</label>
+					<label>Audio Files</label>
 					<input
 						type='file'
-						placeholder='Upload lydfil'
 						onChange={(e) => setAudio(e.target.files[0])}
 					/>
-					<button>Tilføj ekstra lydfil</button>
+					<button>Add Additional Audio File</button>
 				</div>
 				<div className='form-inner-wrap-right'>
-					<div className='inout-container'>
+					<div className='input-container'>
 						<label>Longitude</label>
 						<input
 							type='text'
@@ -111,7 +137,7 @@ function UpdateStory() {
 							onChange={(e) => setLongitude(e.target.value)}
 						/>
 					</div>
-					<div className='inout-container'>
+					<div className='input-container'>
 						<label>Lattitude</label>
 						<input
 							type='text'
@@ -120,7 +146,7 @@ function UpdateStory() {
 							onChange={(e) => setLatitude(e.target.value)}
 						/>
 					</div>
-					<div className='inout-container'>
+					<div className='input-container'>
 						<label>Marker text</label>
 						<input
 							type='text'
@@ -129,6 +155,7 @@ function UpdateStory() {
 							onChange={(e) => setMarkerText(e.target.value)}
 						/>
 					</div>
+					{renderMarkerInputs()}
 				</div>
 				<button type='submit'>Opdater Historie</button>
 			</form>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 
@@ -7,9 +8,62 @@ function AddStory() {
 	const [description, setDescription] = useState('');
 	const [image, setImage] = useState(null);
 	const [audio, setAudio] = useState(null);
-	const [longitude, setLongitude] = useState('');
-	const [latitude, setLatitude] = useState('');
 	const [markerText, setMarkerText] = useState('');
+	const [markerLocations, setMarkerLocations] = useState([]);
+
+	// Map
+	const [draggable, setDraggable] = useState(false);
+	const [position, setPosition] = useState({ lat: 55.4721, lng: 9.4929 });
+	const markerRef = useRef(null);
+	const eventHandlers = useMemo(
+		() => ({
+			dragend() {
+				const marker = markerRef.current;
+				if (marker != null) {
+					setPosition(marker.getLatLng());
+				}
+			},
+		}),
+		[]
+	);
+
+	const toggleDraggable = useCallback(() => {
+		setDraggable((d) => !d);
+	}, []);
+
+	const addMarkerLocation = useCallback(() => {
+		setMarkerLocations((prevLocations) => [
+			...prevLocations,
+			{ lat: position.lat, lng: position.lng },
+		]);
+	}, [position]);
+
+	const renderMarkerInputs = () => {
+		return markerLocations.map((location, index) => (
+			<div key={index}>
+				<label>Longitude</label>
+				<input
+					type='text'
+					value={location.lng}
+					onChange={(e) => {
+						const updatedLocations = [...markerLocations];
+						updatedLocations[index].lng = e.target.value;
+						setMarkerLocations(updatedLocations);
+					}}
+				/>
+				<label>Latitude</label>
+				<input
+					type='text'
+					value={location.lat}
+					onChange={(e) => {
+						const updatedLocations = [...markerLocations];
+						updatedLocations[index].lat = e.target.value;
+						setMarkerLocations(updatedLocations);
+					}}
+				/>
+			</div>
+		));
+	};
 
 	const submitStory = async (e) => {
 		e.preventDefault();
@@ -19,9 +73,7 @@ function AddStory() {
 				description: description,
 				image: image,
 				audio: audio,
-				longitude: longitude,
-				latitude: latitude,
-				markerText: markerText,
+				markerLocations: markerLocations,
 			};
 			console.log(data);
 			const docRef = await addDoc(collection(db, 'stories'), data);
@@ -33,14 +85,9 @@ function AddStory() {
 
 	return (
 		<div>
-			<form
-				style={{
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-				}}>
+			<form onSubmit={submitStory}>
 				<div className='form-inner-wrap-left'>
-					<div className='inout-container'>
+					<div className='input-container'>
 						<label>Title</label>
 						<input
 							type='text'
@@ -49,54 +96,35 @@ function AddStory() {
 							onChange={(e) => setTitle(e.target.value)}
 						/>
 					</div>
-					<div className='inout-container'>
-						<label>Beskrivelse</label>
+					<div className='input-container'>
+						<label>Description</label>
 						<input
 							type='text'
-							placeholder='Beskrivelse'
+							placeholder='Description'
 							value={description}
 							onChange={(e) => setDescription(e.target.value)}
 						/>
 					</div>
-					<div className='inout-container'>
+					<div className='input-container'>
 						<label>Upload Image</label>
 						<input
 							type='file'
-							placeholder='Upload Image'
 							onChange={(e) => setImage(e.target.files[0])}
 						/>
 					</div>
 				</div>
 				<div className='form-inner-wrap-middle'>
-					<label>Lydfiler</label>
+					<label>Audio Files</label>
 					<input
 						type='file'
-						placeholder='Upload lydfil'
 						onChange={(e) => setAudio(e.target.files[0])}
 					/>
-					<button>Tilføj ekstra lydfil</button>
+					<button>Add Additional Audio File</button>
 				</div>
 				<div className='form-inner-wrap-right'>
-					<div className='inout-container'>
-						<label>Longitude</label>
-						<input
-							type='text'
-							placeholder='Longitude'
-							value={longitude}
-							onChange={(e) => setLongitude(e.target.value)}
-						/>
-					</div>
-					<div className='inout-container'>
-						<label>Lattitude</label>
-						<input
-							type='text'
-							placeholder='Lattitude'
-							value={latitude}
-							onChange={(e) => setLatitude(e.target.value)}
-						/>
-					</div>
-					<div className='inout-container'>
-						<label>Marker text</label>
+					{renderMarkerInputs()}
+					<div className='input-container'>
+						<label>Marker Text</label>
 						<input
 							type='text'
 							placeholder='Marker text'
@@ -105,8 +133,33 @@ function AddStory() {
 						/>
 					</div>
 				</div>
-				<button onClick={submitStory}> Lav Historie </button>
+				<button type='submit'>Create Story</button>
 			</form>
+			<div className='map-wrapper'>
+				<MapContainer
+					center={[55.4721, 9.4929]}
+					zoom={16}
+					style={{ height: '500px', width: '500px' }}>
+					<TileLayer
+						url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+						attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+					/>
+					<Marker
+						draggable={draggable}
+						eventHandlers={eventHandlers}
+						position={position}
+						ref={markerRef}>
+						<Popup minWidth={90}>
+							<span onClick={toggleDraggable}>
+								{draggable
+									? 'Marker is draggable'
+									: 'Click here to make marker draggable'}
+							</span>
+						</Popup>
+					</Marker>
+				</MapContainer>
+				<button onClick={addMarkerLocation}>Add Marker Location</button>
+			</div>
 		</div>
 	);
 }
