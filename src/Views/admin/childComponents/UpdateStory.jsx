@@ -3,6 +3,9 @@ import { useParams, NavLink } from 'react-router-dom';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 
+//css modules
+import inputStyle from '../../../assets/styles/components/modules/Inputs/_inputs.module.scss';
+
 function UpdateStory() {
 	const { id } = useParams(); // Get the story ID from the route parameters
 	const [title, setTitle] = useState('');
@@ -68,7 +71,9 @@ function UpdateStory() {
 
 	const renderMarkerInputs = () => {
 		return markerLocations.map((location, index) => (
-			<div key={index}>
+			<div
+				className={inputStyle.inputContainer}
+				key={index}>
 				<label>Longitude</label>
 				<input
 					type='text'
@@ -93,7 +98,7 @@ function UpdateStory() {
 			<form onSubmit={submitStory}>
 				{/* Form inputs */}
 				<div className='form-inner-wrap-left'>
-					<div className='input-container'>
+					<div className={inputStyle.inputContainer}>
 						<label>Title</label>
 						<input
 							type='text'
@@ -102,7 +107,7 @@ function UpdateStory() {
 							onChange={(e) => setTitle(e.target.value)}
 						/>
 					</div>
-					<div className='input-container'>
+					<div className={inputStyle.inputContainer}>
 						<label>Description</label>
 						<input
 							type='text'
@@ -111,7 +116,7 @@ function UpdateStory() {
 							onChange={(e) => setDescription(e.target.value)}
 						/>
 					</div>
-					<div className='input-container'>
+					<div className={inputStyle.inputContainer}>
 						<label>Upload Image</label>
 						<input
 							type='file'
@@ -120,33 +125,17 @@ function UpdateStory() {
 					</div>
 				</div>
 				<div className='form-inner-wrap-middle'>
-					<label>Audio Files</label>
-					<input
-						type='file'
-						onChange={(e) => setAudio(e.target.files[0])}
-					/>
-					<button>Add Additional Audio File</button>
+					<div className={inputStyle.inputContainer}>
+						<label>Audio Files</label>
+						<input
+							type='file'
+							onChange={(e) => setAudio(e.target.files[0])}
+						/>
+						<button>Add Additional Audio File</button>
+					</div>
 				</div>
 				<div className='form-inner-wrap-right'>
-					<div className='input-container'>
-						<label>Longitude</label>
-						<input
-							type='text'
-							placeholder='Longitude'
-							value={longitude}
-							onChange={(e) => setLongitude(e.target.value)}
-						/>
-					</div>
-					<div className='input-container'>
-						<label>Lattitude</label>
-						<input
-							type='text'
-							placeholder='Lattitude'
-							value={latitude}
-							onChange={(e) => setLatitude(e.target.value)}
-						/>
-					</div>
-					<div className='input-container'>
+					<div className={inputStyle.inputContainer}>
 						<label>Marker text</label>
 						<input
 							type='text'

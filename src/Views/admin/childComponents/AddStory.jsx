@@ -3,6 +3,9 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 
+//css modules
+import inputStyle from '../../../assets/styles/components/modules/Inputs/_inputs.module.scss';
+
 function AddStory() {
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
@@ -40,7 +43,9 @@ function AddStory() {
 
 	const renderMarkerInputs = () => {
 		return markerLocations.map((location, index) => (
-			<div key={index}>
+			<div
+				className={inputStyle.inputContainer}
+				key={index}>
 				<label>Longitude</label>
 				<input
 					type='text'
@@ -87,7 +92,7 @@ function AddStory() {
 		<div>
 			<form onSubmit={submitStory}>
 				<div className='form-inner-wrap-left'>
-					<div className='input-container'>
+					<div className={inputStyle.inputContainer}>
 						<label>Title</label>
 						<input
 							type='text'
@@ -96,7 +101,7 @@ function AddStory() {
 							onChange={(e) => setTitle(e.target.value)}
 						/>
 					</div>
-					<div className='input-container'>
+					<div className={inputStyle.inputContainer}>
 						<label>Description</label>
 						<input
 							type='text'
@@ -105,7 +110,7 @@ function AddStory() {
 							onChange={(e) => setDescription(e.target.value)}
 						/>
 					</div>
-					<div className='input-container'>
+					<div className={inputStyle.inputContainer}>
 						<label>Upload Image</label>
 						<input
 							type='file'
@@ -114,16 +119,18 @@ function AddStory() {
 					</div>
 				</div>
 				<div className='form-inner-wrap-middle'>
-					<label>Audio Files</label>
-					<input
-						type='file'
-						onChange={(e) => setAudio(e.target.files[0])}
-					/>
-					<button>Add Additional Audio File</button>
+					<div className={inputStyle.inputContainer}>
+						<label>Audio Files</label>
+						<input
+							type='file'
+							onChange={(e) => setAudio(e.target.files[0])}
+						/>
+						<button>Add Additional Audio File</button>
+					</div>
 				</div>
 				<div className='form-inner-wrap-right'>
 					{renderMarkerInputs()}
-					<div className='input-container'>
+					<div className={inputStyle.inputContainer}>
 						<label>Marker Text</label>
 						<input
 							type='text'
@@ -140,10 +147,7 @@ function AddStory() {
 					center={[55.4721, 9.4929]}
 					zoom={16}
 					style={{ height: '500px', width: '500px' }}>
-					<TileLayer
-						url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-						attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-					/>
+					<TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
 					<Marker
 						draggable={draggable}
 						eventHandlers={eventHandlers}
