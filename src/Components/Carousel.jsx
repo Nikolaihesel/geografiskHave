@@ -4,7 +4,7 @@ import AsianFlower from '../image/asiatisk-blomst.png';
 import HistoryImg from '../image/geografisk-have-historien.png';
 
 // CSS modules
-import Style from '../assets/styles/components/modules/carousel.module.scss';
+import Style from '@/assets/styles/components/modules/carousel.module.scss';
 
 //component
 import CarouselCard from '../Components/CarouselCard';
