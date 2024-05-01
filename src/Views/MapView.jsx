@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
 
+//import AudioPlayer from '../Components/AudioPlayer';
+//import { PlayerApp } from '../Components/AudioPlayer';
 import { DraggableMenu } from '../Components/DraggableMenu';
+
 function MapView() {
 	const [userLocation, setUserLocation] = useState([55.471, 9.4868]);
 
@@ -40,7 +43,10 @@ function MapView() {
 					<Popup>Your location</Popup>
 				</Marker>
 			</MapContainer>
+			{/*<PlayerApp />
+			<AudioPlayer />*/}
 			<DraggableMenu />
+			
 		</div>
 	);
 }
