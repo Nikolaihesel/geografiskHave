@@ -1,18 +1,27 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import React, { useState, useRef, useMemo } from 'react';
+import {
+	getStorage,
+	ref,
+	uploadBytesResumable,
+	getDownloadURL,
+} from 'firebase/storage';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
-//css modules
+// CSS modules
 import inputStyle from '../../../assets/styles/components/modules/Inputs/_inputs.module.scss';
+
+//TODO refactor this component
 
 function AddStory() {
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
-	const [image, setImage] = useState(null);
+	const [file, setFile] = useState(null);
 	const [audio, setAudio] = useState(null);
 	const [markerText, setMarkerText] = useState('');
 	const [markerLocations, setMarkerLocations] = useState([]);
+	const [progress, setProgress] = useState(0);
 
 	// Map
 	const [draggable, setDraggable] = useState(false);
@@ -30,16 +39,68 @@ function AddStory() {
 		[]
 	);
 
-	const toggleDraggable = useCallback(() => {
-		setDraggable((d) => !d);
-	}, []);
+	const storage = getStorage();
 
-	const addMarkerLocation = useCallback(() => {
-		setMarkerLocations((prevLocations) => [
-			...prevLocations,
-			{ lat: position.lat, lng: position.lng },
-		]);
-	}, [position]);
+	const handleChange = (e) => {
+		const selectedFile = e.target.files[0];
+		setFile(selectedFile);
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+
+		if (file) {
+			// Upload file to firebase Storage - not firestore
+			const storageRef = ref(storage, file.name);
+			const uploadTask = uploadBytesResumable(storageRef, file);
+
+			uploadTask.on(
+				'state_changed',
+				(snapshot) => {
+					const uploadProgress =
+						(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+					setProgress(uploadProgress);
+				},
+				(error) => {
+					console.error('Error uploading file:', error);
+				},
+				async () => {
+					// Upload completed successfully
+					const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+					console.log('File uploaded:', downloadURL);
+					//TODO add audio file
+
+					try {
+						const docRef = await addDoc(collection(db, 'stories'), {
+							title: title,
+							description: description,
+							image: downloadURL,
+							audio: audio,
+							markerText: markerText,
+							markerLocations: markerLocations,
+						});
+						console.log('Document added with ID:', docRef.id);
+					} catch (error) {
+						console.error('Error adding document:', error);
+					}
+				}
+			);
+		}
+	};
+
+	const handleAudioChange = (e) => {
+		const selectedAudio = e.target.files[0];
+		setAudio(selectedAudio);
+	};
+
+	const handleMarkerTextChange = (e) => {
+		setMarkerText(e.target.value);
+	};
+
+	const addMarkerLocation = () => {
+		// Add marker location to the markerLocations array
+		setMarkerLocations([...markerLocations, { lat: 0, lng: 0 }]); // Update with actual lat/lng
+	};
 
 	const renderMarkerInputs = () => {
 		return markerLocations.map((location, index) => (
@@ -50,47 +111,27 @@ function AddStory() {
 				<input
 					type='text'
 					value={location.lng}
-					onChange={(e) => {
-						const updatedLocations = [...markerLocations];
-						updatedLocations[index].lng = e.target.value;
-						setMarkerLocations(updatedLocations);
-					}}
+					onChange={(e) => handleMarkerLocationChange(e, index, 'lng')}
 				/>
 				<label>Latitude</label>
 				<input
 					type='text'
 					value={location.lat}
-					onChange={(e) => {
-						const updatedLocations = [...markerLocations];
-						updatedLocations[index].lat = e.target.value;
-						setMarkerLocations(updatedLocations);
-					}}
+					onChange={(e) => handleMarkerLocationChange(e, index, 'lat')}
 				/>
 			</div>
 		));
 	};
 
-	const submitStory = async (e) => {
-		e.preventDefault();
-		try {
-			const data = {
-				title: title,
-				description: description,
-				image: image,
-				audio: audio,
-				markerLocations: markerLocations,
-			};
-			console.log(data);
-			const docRef = await addDoc(collection(db, 'stories'), data);
-			console.log('Document added with ID:', docRef.id);
-		} catch (error) {
-			console.error('Error adding document:', error);
-		}
+	const handleMarkerLocationChange = (e, index, key) => {
+		const updatedLocations = [...markerLocations];
+		updatedLocations[index][key] = e.target.value;
+		setMarkerLocations(updatedLocations);
 	};
 
 	return (
 		<div>
-			<form onSubmit={submitStory}>
+			<form onSubmit={handleSubmit}>
 				<div className='form-inner-wrap-left'>
 					<div className={inputStyle.inputContainer}>
 						<label>Title</label>
@@ -114,7 +155,7 @@ function AddStory() {
 						<label>Upload Image</label>
 						<input
 							type='file'
-							onChange={(e) => setImage(e.target.files[0])}
+							onChange={handleChange}
 						/>
 					</div>
 				</div>
@@ -123,7 +164,7 @@ function AddStory() {
 						<label>Audio Files</label>
 						<input
 							type='file'
-							onChange={(e) => setAudio(e.target.files[0])}
+							onChange={handleAudioChange}
 						/>
 						<button>Add Additional Audio File</button>
 					</div>
@@ -136,7 +177,7 @@ function AddStory() {
 							type='text'
 							placeholder='Marker text'
 							value={markerText}
-							onChange={(e) => setMarkerText(e.target.value)}
+							onChange={handleMarkerTextChange}
 						/>
 					</div>
 				</div>
@@ -149,12 +190,11 @@ function AddStory() {
 					style={{ height: '500px', width: '500px' }}>
 					<TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
 					<Marker
-						draggable={draggable}
-						eventHandlers={eventHandlers}
-						position={position}
-						ref={markerRef}>
+						draggable={true}
+						position={[position.lat, position.lng]}
+						onDragend={(e) => setPosition(e.target.getLatLng())}>
 						<Popup minWidth={90}>
-							<span onClick={toggleDraggable}>
+							<span>
 								{draggable
 									? 'Marker is draggable'
 									: 'Click here to make marker draggable'}
@@ -164,6 +204,7 @@ function AddStory() {
 				</MapContainer>
 				<button onClick={addMarkerLocation}>Add Marker Location</button>
 			</div>
+			<div>{progress}% Uploaded</div>
 		</div>
 	);
 }

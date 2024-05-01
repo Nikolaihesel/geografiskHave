@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, NavLink } from 'react-router-dom';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { db } from '../../../config/firebase';
+import { db } from '@/config/firebase';
 
 //css modules
-import inputStyle from '../../../assets/styles/components/modules/Inputs/_inputs.module.scss';
+import inputStyle from '@/assets/styles/components/modules/Inputs/_inputs.module.scss';
+
+//TODO refactor this component, to some smaller components
+//TODO update to handle storage & firestore
 
 function UpdateStory() {
 	const { id } = useParams(); // Get the story ID from the route parameters
