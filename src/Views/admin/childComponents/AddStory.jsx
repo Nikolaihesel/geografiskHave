@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useRef, useMemo, useCallback } from 'react';
 import {
 	getStorage,
 	ref,
@@ -12,7 +12,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 // CSS modules
 import inputStyle from '../../../assets/styles/components/modules/Inputs/_inputs.module.scss';
 
-//TODO refactor this component
+//TODO refactor this component, to some smaller components
 
 function AddStory() {
 	const [title, setTitle] = useState('');
@@ -99,7 +99,10 @@ function AddStory() {
 
 	const addMarkerLocation = () => {
 		// Add marker location to the markerLocations array
-		setMarkerLocations([...markerLocations, { lat: 0, lng: 0 }]); // Update with actual lat/lng
+		setMarkerLocations([
+			...markerLocations,
+			{ lat: position.lat, lng: position.lng },
+		]);
 	};
 
 	const renderMarkerInputs = () => {
@@ -129,6 +132,9 @@ function AddStory() {
 		setMarkerLocations(updatedLocations);
 	};
 
+	const toggleDraggable = useCallback(() => {
+		setDraggable((d) => !d);
+	}, []);
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
@@ -190,11 +196,11 @@ function AddStory() {
 					style={{ height: '500px', width: '500px' }}>
 					<TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
 					<Marker
-						draggable={true}
+						draggable={draggable}
 						position={[position.lat, position.lng]}
 						onDragend={(e) => setPosition(e.target.getLatLng())}>
 						<Popup minWidth={90}>
-							<span>
+							<span onClick={toggleDraggable}>
 								{draggable
 									? 'Marker is draggable'
 									: 'Click here to make marker draggable'}

@@ -1,4 +1,3 @@
-// StorageTest.jsx
 import React, { useState } from 'react';
 import {
 	getStorage,
@@ -35,9 +34,9 @@ function StorageTest() {
 					console.error('Error uploading file:', error);
 				},
 				async () => {
-					// Upload completed successfully
 					const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
 					console.log('File available at:', downloadURL);
+					//makes url in document in firestore - where the image is stored in storage
 					const docRef = await addDoc(collection(db, 'imageUrl'), {
 						downloadURL,
 					});
