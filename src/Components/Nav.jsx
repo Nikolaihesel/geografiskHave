@@ -12,7 +12,9 @@ function Nav() {
 	return (
 		<nav>
 			<div className={Style.navContainer}>
-				<h1>Geografisk Have</h1>
+			<NavLink to='/'> {/* Wrap this line around the h1 tag */}
+          <h1>Geografisk Have</h1>
+        </NavLink> {/* Close NavLink here */}
 				<div className={Style.ticketIcon}>
   					<img className={Style.ticketIconYellow} src={ticketIcon} alt="Ticket Icon" />
 				</div>
