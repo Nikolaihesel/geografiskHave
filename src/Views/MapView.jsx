@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
+import AudioPlayer from '@/Components/AudioPlayer';
 
-//import AudioPlayer from '../Components/AudioPlayer';
-//import { PlayerApp } from '../Components/AudioPlayer';
 import { DraggableMenu } from '../Components/DraggableMenu';
 
 function MapView() {
@@ -25,7 +24,6 @@ function MapView() {
 
 	console.log('userLocation:', userLocation);
 	return (
-		// use draggable marker in cms
 		<div style={{ height: '90vh', width: '100vw' }}>
 			<MapContainer
 				center={[55.4721, 9.4929]}
@@ -43,10 +41,8 @@ function MapView() {
 					<Popup>Your location</Popup>
 				</Marker>
 			</MapContainer>
-			{/*<PlayerApp />
-			<AudioPlayer />*/}
+			<AudioPlayer />
 			<DraggableMenu />
-			
 		</div>
 	);
 }

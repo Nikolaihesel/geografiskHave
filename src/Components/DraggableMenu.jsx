@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Draggable from 'react-draggable';
+import AudioPlayer from './AudioPlayer';
 import { DraggableCore } from 'react-draggable';
 
 function DraggableMenu() {
@@ -34,7 +35,9 @@ function DraggableMenu() {
 						alignItems: 'flex-start',
 					}}>
 					Draggable Footer
-					<div>Test</div>
+					<div>
+						<AudioPlayer />
+					</div>
 				</div>
 			</Draggable>
 		</>
