@@ -187,7 +187,7 @@ function AddStory() {
 						/>
 					</div>
 				</div>
-				<button type='submit'>Create Story</button>
+				<button type='handleSubmit'>Create Story</button>
 			</form>
 			<div className='map-wrapper'>
 				<MapContainer
