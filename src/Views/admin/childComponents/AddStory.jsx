@@ -9,6 +9,10 @@ import {
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { useNavigate } from 'react-router-dom';
 
 // CSS modules
 import inputStyle from '../../../assets/styles/components/modules/Inputs/_inputs.module.scss';
@@ -23,6 +27,7 @@ function AddStory() {
 	const [markerText, setMarkerText] = useState('');
 	const storage = getStorage();
 	const [markerLocations, setMarkerLocations] = useState([]);
+	const navigate = useNavigate();
 
 	// Map
 	const [draggable, setDraggable] = useState(false);
@@ -35,75 +40,68 @@ function AddStory() {
 		setFile(selectedFile);
 	};
 
+	
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
-		if (file) {
-			// Upload file to firebase Storage - not firestore
-			const storageRef = ref(storage, file.name);
-			const uploadTask = uploadBytesResumable(storageRef, file);
-
-			uploadTask.on(
-				'state_changed',
-				(snapshot) => {
-					const uploadProgress =
-						(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-					setProgress(uploadProgress);
-				},
-				(error) => {
-					console.error('Error uploading file:', error);
-				},
-				async () => {
-					// Upload completed successfully
-					const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-					console.log('File uploaded:', downloadURL);
-
-					if (audio.length > 0) {
-						let audioURLs = [];
-						for (let i = 0; i < audio.length; i++) {
-							const audioFile = audio[i];
-							// Upload audio to firebase Storage - not firestore
-							const audioRef = ref(storage, audioFile.name);
-							const uploadAudioTask = uploadBytesResumable(audioRef, audioFile);
-					
-							uploadAudioTask.on(
-								'state_changed',
-								(snapshot) => {
-									const uploadProgress =
-										(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-									setProgress(uploadProgress);
-								},
-								(error) => {
-									console.error('Error uploading audio:', error);
-								},
-								async () => {
-									// Upload completed successfully
-									const audioURL = await getDownloadURL(uploadAudioTask.snapshot.ref);
-									console.log('Audio uploaded:', audioURL);
-									audioURLs.push(audioURL); // Add the audio URL to the array
-					
-									// If this is the last audio file, add the document to Firestore
-									if (i === audio.length - 1) {
-										try {
-											const docRef = await addDoc(collection(db, 'stories'), {
-												title: title,
-												description: description,
-												image: downloadURL,
-												audio: audioURLs, // Use the array of audio URLs here
-												markerText: markerText,
-												markerLocations: markerLocations,
-											});
-											console.log('Document added with ID:', docRef.id);
-										} catch (error) {
-											console.error('Error adding document:', error);
-										}
-									}
-								}
-							);
-						}
-					}
+	
+		if (!file) {
+			console.error('No file selected for upload');
+			return;
 		}
-	)}};
+	
+		// Upload file to Firebase Storage - not Firestore
+		const storageRef = ref(storage, file.name);
+		const uploadTask = uploadBytesResumable(storageRef, file);
+	
+		try {
+			await uploadTask;
+			const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+			console.log('File uploaded:', downloadURL);
+	
+			let audioURLs = [];
+			for (const audioFile of audio) {
+				const audioRef = ref(storage, audioFile.name);
+				const uploadAudioTask = uploadBytesResumable(audioRef, audioFile);
+				await uploadAudioTask;
+				const audioURL = await getDownloadURL(uploadAudioTask.snapshot.ref);
+				audioURLs.push(audioURL);
+			}
+	
+			// Add the document to Firestore
+			const docRef = await addDoc(collection(db, 'stories'), {
+				title,
+				description,
+				image: downloadURL,
+				audio: audioURLs,
+				markerText,
+				markerLocations,
+			});
+			console.log('Document added with ID:', docRef.id);
+			toast.success('Story added successfully!', {
+				position: "top-center",
+				autoClose: false, // Disable auto-close
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				closeButton: true, // Show close button
+				progress: undefined,
+			  });
+			  
+			  // Set a timer for the toast
+			  const toastTimer = setTimeout(() => {
+				toast.dismiss(); // This will close the toast
+				navigate('/admin'); // Navigate after the toast is closed
+			  }, 5000); // Set the timer for 5 seconds
+			  
+			  toast.onChange((numberOfToastDisplayed) => {
+				if (numberOfToastDisplayed === 0) {
+				  clearTimeout(toastTimer); // Clear the timer if the toast is manually closed
+				}
+			  });
+		} catch (error) {
+			console.error('Error during the upload process:', error);
+		}
+	};
 
 	const handleAudioChange = (e) => {
 		const selectedAudio = e.target.files; // This is now a FileList of files
@@ -229,6 +227,7 @@ function AddStory() {
 					</div>
 				</div>
 				<button type='handleSubmit'>Create Story</button>
+				
 			</form>
 			<div className='map-wrapper'>
 				<MapContainer

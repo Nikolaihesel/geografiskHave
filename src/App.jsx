@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Components
 import MainView from './Views/MainView';
@@ -59,6 +61,7 @@ function App() {
 					</Route>
 				</Routes>
 			</BrowserRouter>
+			<ToastContainer />
 		</main>
 	);
 }
