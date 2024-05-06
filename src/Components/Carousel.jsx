@@ -71,8 +71,9 @@ function Carousel() {
 				key={story.id}
 				className={Style.CarouselCard}>
 				<CarouselCard
-					StoryImg={story.image}
-					StoryTitle={story.title}
+				StoryImg={story.image}
+				StoryTitle={story.title}
+				StoryId={story.id} // Pass the story ID here
 				/>
 			</div>
 		))}

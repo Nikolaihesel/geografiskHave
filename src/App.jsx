@@ -21,10 +21,7 @@ function App() {
 						path='/'
 						element={<MainView />}
 					/>
-					<Route
-						path='map'
-						element={<MapView />}
-					/>
+					<Route path="/map/:storyId" element={<MapView />} />
 
 					<Route
 						path='/'
