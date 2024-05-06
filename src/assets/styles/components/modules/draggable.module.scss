@@ -1,0 +1,38 @@
+@use '../../base/variables.scss' as *;
+@use '../../mixins/typography-mixins.scss' as t;
+@use '../modules/buttons' as b;
+
+.draggableWrapper{
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    padding: 3vh;
+    border-top-left-radius: 3vh;
+    border-top-right-radius: 3vh;
+    background-color: $neutral-tint-10;
+    border: solid $neutral-tint-10 1px;
+}
+
+.draggable {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    position: absolute;
+    width: 100%;
+    height: 80vh;
+    padding: 3vh;
+    border-top-left-radius: 3vh;
+    border-top-right-radius: 3vh;
+    background-color: $neutral-tint-10;
+    border: solid $neutral-tint-10 1px;
+}
+
+.lineDrag {
+    border-bottom: solid $grey-medium-color 6px;
+    border-radius: 10%;
+    width: 20vw;
+    align-self: center;
+    margin: 1vh;
+}

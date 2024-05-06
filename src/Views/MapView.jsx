@@ -4,7 +4,6 @@ import { db } from '../config/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
 
-import AudioPlayer from '@/Components/AudioPlayer';
 import { DraggableMenu } from '../Components/DraggableMenu';
 
 function MapView() {
@@ -50,11 +49,11 @@ function MapView() {
 	}, [storyId]);
 
 	return (
-		<div style={{ height: '90vh', width: '100vw' }}>
+		<div style={{ height: '85vh', width: '100vw' }}>
 			<MapContainer
 				center={storyDetails?.markerLocations || [55.4721, 9.4929]}
 				zoom={16}
-				style={{ height: '100%', width: '100%' }}>
+				style={{ height: '100%', width: '100%'}}>
 				<TileLayer
 					url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 					attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -72,8 +71,7 @@ function MapView() {
 					<Popup>Your location</Popup>
 				</Marker>
 			</MapContainer>
-
-			<AudioPlayer />
+		
 			<DraggableMenu />
 		</div>
 	);
