@@ -4,7 +4,7 @@ import { db } from '../../config/firebase';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 
 // CSS modules
-import Style from "../../assets/styles/components/modules/admin.module.scss";
+import Style from '../../assets/styles/components/modules/admin.module.scss';
 
 function AdminMain() {
 	const [stories, setStories] = useState([]);
@@ -49,7 +49,11 @@ function AdminMain() {
 			<h1>Admin Main</h1>
 			<p>Her kan du administrere stories</p>
 
-			<button className={Style.deleteButton} onClick={() => handleDelete(storyId.id)}>Delete post</button>
+			<button
+				className={Style.deleteButton}
+				onClick={() => handleDelete(storyId.id)}>
+				Delete post
+			</button>
 
 			{stories.map((story, index) => (
 				<div

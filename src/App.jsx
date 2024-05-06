@@ -9,7 +9,10 @@ import Admin from './Views/admin/Admin';
 import AddStory from './Views/admin/childComponents/AddStory';
 import UpdateStory from './Views/admin/childComponents/UpdateStory';
 import AdminMain from './Views/admin/AdminMain';
+
+// tests
 import StorageTest from './Views/admin/childComponents/StorageTest';
+import MapTest from '@/Views/MapTest';
 
 function App() {
 	return (
@@ -24,6 +27,10 @@ function App() {
 					<Route
 						path='map'
 						element={<MapView />}
+					/>
+					<Route
+						path='maptest'
+						element={<MapTest />}
 					/>
 
 					<Route
