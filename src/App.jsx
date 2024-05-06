@@ -32,6 +32,10 @@ function App() {
 						path='maptest'
 						element={<MapTest />}
 					/>
+					<Route
+						path='/map/:storyId'
+						element={<MapView />}
+					/>
 
 					<Route
 						path='/'
