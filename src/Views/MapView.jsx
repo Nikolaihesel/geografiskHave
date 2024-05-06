@@ -3,6 +3,8 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { db } from '../config/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
+
+import AudioPlayer from '@/Components/AudioPlayer';
 import { DraggableMenu } from '../Components/DraggableMenu';
 
 function MapView() {
@@ -57,15 +59,21 @@ function MapView() {
 					url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 					attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 				/>
-				{storyDetails && (
-					<Marker position={storyDetails.markerLocations}>
-						<Popup>{storyDetails.title}</Popup>
-					</Marker>
-				)}
+				{storyDetails &&
+					storyDetails.markerLocations &&
+					storyDetails.markerLocations.map((location, index) => (
+						<Marker
+							key={index}
+							position={location}>
+							<Popup>{storyDetails.title}</Popup>
+						</Marker>
+					))}
 				<Marker position={userLocation}>
 					<Popup>Your location</Popup>
 				</Marker>
 			</MapContainer>
+
+			<AudioPlayer />
 			<DraggableMenu />
 		</div>
 	);
