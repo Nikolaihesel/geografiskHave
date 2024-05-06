@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { db } from '../../../config/firebase';
+import { db } from '../../config/firebase';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 
 // CSS modules
-import Style from "../../../assets/styles/components/modules/admin.module.scss";
+import Style from "../../assets/styles/components/modules/admin.module.scss";
 
 function AdminMain() {
 	const [stories, setStories] = useState([]);

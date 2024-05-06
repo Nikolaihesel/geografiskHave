@@ -8,7 +8,7 @@ import MapView from './Views/MapView';
 import Admin from './Views/admin/Admin';
 import AddStory from './Views/admin/childComponents/AddStory';
 import UpdateStory from './Views/admin/childComponents/UpdateStory';
-import AdminMain from './Views/admin/childComponents/AdminMain';
+import AdminMain from './Views/admin/AdminMain';
 import StorageTest from './Views/admin/childComponents/StorageTest';
 
 function App() {
