@@ -3,8 +3,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { db } from '../config/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
-
-import AudioPlayer from '@/Components/AudioPlayer';
 import { DraggableMenu } from '../Components/DraggableMenu';
 
 function MapView() {
@@ -68,8 +66,6 @@ function MapView() {
 					<Popup>Your location</Popup>
 				</Marker>
 			</MapContainer>
-
-			<AudioPlayer />
 			<DraggableMenu />
 		</div>
 	);
