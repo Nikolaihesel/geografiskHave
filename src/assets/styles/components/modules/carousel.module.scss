@@ -1,4 +1,5 @@
 @use '../../base/typography.scss' as *;
+@use '../../base/variables.scss' as v;
 
 .Carousel {
 	width: 100%;
@@ -37,7 +38,7 @@
 	width: 10px;
 	height: 10px;
 	border-radius: 50%;
-	background-color: gray;
+	background-color: v.$grey-dark-color;
 	margin: 0 5px;
 	cursor: pointer;
 }

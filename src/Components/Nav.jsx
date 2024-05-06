@@ -33,7 +33,7 @@ function Nav() {
 						<NavLink
 							to='map'
 							onClick={() => setNav(false)}>
-							<li> map</li>
+							<li> Map</li>
 						</NavLink>
 						<NavLink
 							to='/'
