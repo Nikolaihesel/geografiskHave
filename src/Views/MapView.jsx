@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { db } from '../config/firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import { useParams } from 'react-router-dom';
 
 import AudioPlayer from '@/Components/AudioPlayer';
 import { DraggableMenu } from '../Components/DraggableMenu';

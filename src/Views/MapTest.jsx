@@ -4,6 +4,7 @@ import React, {
 	useRef,
 	useMemo,
 	useCallback,
+	useParams,
 } from 'react';
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
 
@@ -13,7 +14,7 @@ function MapTest() {
 	//TRACK LOCATION IN THIS STATE
 	const [position, setPosition] = useState([55.4721, 9.4929]);
 	const markerRef = useRef(null);
-	const eventHandlers = useMemo(
+	const eventHandler = useMemo(
 		() => ({
 			dragend() {
 				const marker = markerRef.current;
@@ -43,7 +44,7 @@ function MapTest() {
 				<Marker
 					draggable={draggable}
 					position={position}
-					eventHandlers={eventHandlers}
+					eventHandlers={eventHandler}
 					ref={markerRef}>
 					<Popup minWidth={90}>
 						<div>
