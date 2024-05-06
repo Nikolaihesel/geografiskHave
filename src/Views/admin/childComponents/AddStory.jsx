@@ -2,6 +2,7 @@ import React, { useState, useRef, useMemo, useCallback } from 'react';
 import {
 	getStorage,
 	ref,
+	uploadBytes,
 	uploadBytesResumable,
 	getDownloadURL,
 } from 'firebase/storage';
@@ -18,7 +19,7 @@ function AddStory() {
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
 	const [file, setFile] = useState(null);
-	const [audio, setAudio] = useState(null);
+	const [audio, setAudio] = useState([]);
 	const [markerText, setMarkerText] = useState('');
 	const storage = getStorage();
 	const [markerLocations, setMarkerLocations] = useState([]);
@@ -56,29 +57,61 @@ function AddStory() {
 					// Upload completed successfully
 					const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
 					console.log('File uploaded:', downloadURL);
-					//TODO add audio file
 
-					try {
-						const docRef = await addDoc(collection(db, 'stories'), {
-							title: title,
-							description: description,
-							image: downloadURL,
-							audio: audio,
-							markerText: markerText,
-							markerLocations: markerLocations,
-						});
-						console.log('Document added with ID:', docRef.id);
-					} catch (error) {
-						console.error('Error adding document:', error);
+					if (audio.length > 0) {
+						let audioURLs = [];
+						for (let i = 0; i < audio.length; i++) {
+							const audioFile = audio[i];
+							// Upload audio to firebase Storage - not firestore
+							const audioRef = ref(storage, audioFile.name);
+							const uploadAudioTask = uploadBytesResumable(audioRef, audioFile);
+					
+							uploadAudioTask.on(
+								'state_changed',
+								(snapshot) => {
+									const uploadProgress =
+										(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+									setProgress(uploadProgress);
+								},
+								(error) => {
+									console.error('Error uploading audio:', error);
+								},
+								async () => {
+									// Upload completed successfully
+									const audioURL = await getDownloadURL(uploadAudioTask.snapshot.ref);
+									console.log('Audio uploaded:', audioURL);
+									audioURLs.push(audioURL); // Add the audio URL to the array
+					
+									// If this is the last audio file, add the document to Firestore
+									if (i === audio.length - 1) {
+										try {
+											const docRef = await addDoc(collection(db, 'stories'), {
+												title: title,
+												description: description,
+												image: downloadURL,
+												audio: audioURLs, // Use the array of audio URLs here
+												markerText: markerText,
+												markerLocations: markerLocations,
+											});
+											console.log('Document added with ID:', docRef.id);
+										} catch (error) {
+											console.error('Error adding document:', error);
+										}
+									}
+								}
+							);
+						}
 					}
-				}
-			);
 		}
-	};
+	)}};
 
 	const handleAudioChange = (e) => {
-		const selectedAudio = e.target.files[0];
-		setAudio(selectedAudio);
+		const selectedAudio = e.target.files; // This is now a FileList of files
+		setAudio(prevAudio => [...prevAudio, ...selectedAudio]); // This will append new files to the existing audio state
+	};
+
+	const removeAudio = (indexToRemove) => {
+		setAudio(prevAudio => prevAudio.filter((_, index) => index !== indexToRemove));
 	};
 
 	const handleMarkerTextChange = (e) => {
@@ -134,7 +167,7 @@ function AddStory() {
 		[]
 	);
 
-	console.log('position:', position);
+
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
@@ -171,8 +204,16 @@ function AddStory() {
 						<input
 							type='file'
 							onChange={handleAudioChange}
+							multiple // This allows multiple file selection
 						/>
-						<button>Add Additional Audio File</button>
+						<ul>
+							{audio.map((audioFile, index) => (
+								<li key={index}>
+									{audioFile.name}
+									<button onClick={() => removeAudio(index)}>Remove</button>
+								</li>
+							))}
+						</ul>
 					</div>
 				</div>
 				<div className='form-inner-wrap-right'>
