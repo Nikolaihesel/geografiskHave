@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Draggable from 'react-draggable';
-import AudioPlayer from './AudioPlayer';
+import Audio from './Audio';
 import { DraggableCore } from 'react-draggable';
+
+import Style from '../assets/styles/components/modules/draggable.module.scss';
 
 function DraggableMenu() {
 	const [footerPosition, setFooterPosition] = useState({ x: 0, y: 0 });
@@ -14,33 +16,34 @@ function DraggableMenu() {
 	};
 
 	return (
-		<>
+		<div className={Style.draggable}>
+			<div className={Style.lineDrag}></div>
 			<Draggable
 				axis='y'
 				onDrag={handleDrag}
 				bounds={{ top: -550, bottom: 0 }}>
-				<div
+				<div className={Style.audioDrag}
 					style={{
-						position: 'absolute',
-						bottom: '-73vh',
-						left: '0',
+						//position: 'absolute',
+						//bottom: '-73vh',
+						//left: '0',
 						transform: `translate ${footerPosition.y}px)`,
 						zIndex: '1000',
-						width: '100%',
-						height: '80vh',
-						backgroundColor: 'gray',
-						color: 'white',
-						display: 'flex',
-						justifyContent: 'center',
-						alignItems: 'flex-start',
+						//width: '100%',
+						//height: '80vh',
+						//backgroundColor: 'gray',
+						//color: 'white',
+						//display: 'flex',
+						//justifyContent: 'center',
+						//alignItems: 'flex-start',
 					}}>
 					Draggable Footer
 					<div>
-						<AudioPlayer />
+						<Audio />
 					</div>
 				</div>
 			</Draggable>
-		</>
+		</div>
 	);
 }
 

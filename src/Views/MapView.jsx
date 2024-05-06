@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
-import AudioPlayer from '@/Components/AudioPlayer';
 
 import { DraggableMenu } from '../Components/DraggableMenu';
 
@@ -41,7 +40,7 @@ function MapView() {
 					<Popup>Your location</Popup>
 				</Marker>
 			</MapContainer>
-			<AudioPlayer />
+		
 			<DraggableMenu />
 		</div>
 	);
