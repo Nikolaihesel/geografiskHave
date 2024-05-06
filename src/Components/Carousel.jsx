@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
-import WintherImg from '../image/vinter-silhuet.jpg';
-import AsianFlower from '../image/asiatisk-blomst.png';
-import HistoryImg from '../image/geografisk-have-historien.png';
+import { db } from '../config/firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
 // CSS modules
 import Style from '@/assets/styles/components/modules/carousel.module.scss';
@@ -9,39 +8,42 @@ import Style from '@/assets/styles/components/modules/carousel.module.scss';
 //component
 import CarouselCard from '../Components/CarouselCard';
 
-const carouselData = {
-	stories: [
-		{
-			id: 1,
-			title: 'Geografisk haves historier',
-			img: HistoryImg,
-		},
-		{
-			id: 2,
-			title: 'Vinter Silhuetter',
-			img: WintherImg,
-		},
-		{
-			id: 3,
-			title: 'Asiens eventyrlige planer',
-			img: AsianFlower,
-		},
-	],
-};
-
 function Carousel() {
+	const [stories, setStories] = useState([]);
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const carouselRef = useRef();
 
-	const handleDotClick = (index) => {
-		setCurrentIndex(index);
-	};
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const querySnapshot = await getDocs(collection(db, 'stories'));
+				const fetchedStories = [];
+				querySnapshot.forEach((doc) => {
+					const data = doc.data();
+					fetchedStories.push({
+						id: doc.id,
+						title: data.title,
+						description: data.description,
+						image: data.image,
+						audio: data.audio,
+						markerText: data.markerText,
+						markerLocations: data.markerLocations,
+					});
+				});
+				setStories(fetchedStories);
+			} catch (error) {
+				console.error('Error fetching data:', error);
+			}
+		};
+	
+		fetchData();
+	}, []);
 
 	useEffect(() => {
 		const handleScroll = () => {
 			const container = carouselRef.current;
 			const containerWidth = container.clientWidth;
-			const cardWidth = container.scrollWidth / carouselData.stories.length;
+			const cardWidth = container.scrollWidth / stories.length;
 			const middle = containerWidth / 2;
 
 			const targetIndex = Math.floor(
@@ -57,26 +59,26 @@ function Carousel() {
 		return () => {
 			container.removeEventListener('scroll', handleScroll);
 		};
-	}, []);
+	}, [stories]);
 
 	return (
 		<div className={Style.Carousel}>
 			<div
 				className={Style.CarouselContainer}
 				ref={carouselRef}>
-				{carouselData.stories.map((card, index) => (
-					<div
-						key={index}
-						className={Style.CarouselCard}>
-						<CarouselCard
-							StoryImg={card.img}
-							StoryTitle={card.title}
-						/>
-					</div>
-				))}
+				{stories.map((story, index) => (
+			<div
+				key={story.id}
+				className={Style.CarouselCard}>
+				<CarouselCard
+					StoryImg={story.image}
+					StoryTitle={story.title}
+				/>
+			</div>
+		))}
 			</div>
 			<div className={Style.DotNavigation}>
-				{carouselData.stories.map((_, index) => (
+				{stories.map((_, index) => (
 					<div
 						key={index}
 						className={`${Style.Dot} ${
