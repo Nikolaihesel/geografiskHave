@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Draggable from 'react-draggable';
-import AudioPlayer from './AudioPlayer';
+import AudioComponent from './AudioPlayer';
 import { DraggableCore } from 'react-draggable';
 
 function DraggableMenu() {
@@ -36,7 +36,7 @@ function DraggableMenu() {
 					}}>
 					Draggable Footer
 					<div>
-						<AudioPlayer />
+						<AudioComponent />
 					</div>
 				</div>
 			</Draggable>

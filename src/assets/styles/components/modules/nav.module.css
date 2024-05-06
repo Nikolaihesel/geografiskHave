@@ -26,6 +26,9 @@
   height: 100%;
   white-space: nowrap;
 }
+.navContainer a {
+  text-decoration: none;
+}
 .navContainer div {
   flex: 1;
   cursor: pointer;

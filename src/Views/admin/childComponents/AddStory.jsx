@@ -98,7 +98,6 @@ function AddStory() {
 	};
 
 	const addMarkerLocation = () => {
-		// Add marker location to the markerLocations array
 		setMarkerLocations([
 			...markerLocations,
 			{ lat: position.lat, lng: position.lng },
@@ -135,6 +134,7 @@ function AddStory() {
 	const toggleDraggable = useCallback(() => {
 		setDraggable((d) => !d);
 	}, []);
+
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>

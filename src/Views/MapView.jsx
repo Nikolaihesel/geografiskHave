@@ -22,6 +22,21 @@ function MapView() {
 		};
 	}, []);
 
+	const markerObject = {
+		1: {
+			position: [55.4721, 9.4929],
+			markerText: 'This is a marker',
+		},
+		2: {
+			position: [55.4721, 9.4929],
+			markerText: 'This is a marker',
+		},
+		3: {
+			position: [55.4721, 9.4929],
+			markerText: 'This is a marker',
+		},
+	};
+
 	console.log('userLocation:', userLocation);
 	return (
 		<div style={{ height: '90vh', width: '100vw' }}>
@@ -37,11 +52,20 @@ function MapView() {
 					<Popup>Geografisk Have</Popup>
 				</Marker>
 
+				{markerObject &&
+					markerObject.map((index, marker) => {
+						<Marker
+							key={index}
+							position={marker.position}>
+							<Popup> {marker.markerText} </Popup>{' '}
+						</Marker>;
+					})}
+
 				<Marker position={userLocation}>
 					<Popup>Your location</Popup>
 				</Marker>
 			</MapContainer>
-			<AudioPlayer />
+
 			<DraggableMenu />
 		</div>
 	);
