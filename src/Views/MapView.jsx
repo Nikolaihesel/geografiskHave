@@ -23,11 +23,11 @@ function MapView() {
 
 	console.log('userLocation:', userLocation);
 	return (
-		<div style={{ height: '90vh', width: '100vw' }}>
+		<div style={{ height: '85vh', width: '100vw' }}>
 			<MapContainer
 				center={[55.4721, 9.4929]}
 				zoom={16}
-				style={{ height: '100%', width: '100%' }}>
+				style={{ height: '100%', width: '100%'}}>
 				<TileLayer
 					url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

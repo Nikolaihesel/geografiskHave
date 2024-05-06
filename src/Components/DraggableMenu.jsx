@@ -16,19 +16,19 @@ function DraggableMenu() {
 	};
 
 	return (
-		<div className={Style.draggable}>
-			<div className={Style.lineDrag}></div>
-			<Draggable
+		<div>
+			
+			<Draggable 
 				axis='y'
 				onDrag={handleDrag}
 				bounds={{ top: -550, bottom: 0 }}>
-				<div className={Style.audioDrag}
-					style={{
+				<div className={Style.draggable}
+					/*style={{
 						//position: 'absolute',
 						//bottom: '-73vh',
 						//left: '0',
-						transform: `translate ${footerPosition.y}px)`,
-						zIndex: '1000',
+						//transform: `translate ${footerPosition.y}px)`,
+						//zIndex: '1000',
 						//width: '100%',
 						//height: '80vh',
 						//backgroundColor: 'gray',
@@ -36,8 +36,9 @@ function DraggableMenu() {
 						//display: 'flex',
 						//justifyContent: 'center',
 						//alignItems: 'flex-start',
-					}}>
-					Draggable Footer
+					}}*/>
+					<div className={Style.lineDrag}></div>
+					<h3>Draggable Menu</h3>
 					<div>
 						<Audio />
 					</div>
