@@ -9,12 +9,15 @@ import Admin from './Views/admin/Admin';
 import AddStory from './Views/admin/childComponents/AddStory';
 import UpdateStory from './Views/admin/childComponents/UpdateStory';
 import AdminMain from './Views/admin/AdminMain';
+import Auth from '@/Components/auth/Auth';
+import { useAuth } from '@/Context/AuthContext';
 
 // tests
 import StorageTest from './Views/admin/childComponents/StorageTest';
 import MapTest from '@/Views/MapTest';
 
 function App() {
+	const { user } = useAuth();
 	return (
 		<main>
 			<BrowserRouter>
@@ -39,7 +42,7 @@ function App() {
 
 					<Route
 						path='/'
-						element={<Admin />}>
+						element={!user ? <Auth /> : <Admin />}>
 						<Route
 							path='/addstory'
 							element={<AddStory />}

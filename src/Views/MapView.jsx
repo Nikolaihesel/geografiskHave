@@ -10,7 +10,7 @@ import { DraggableMenu } from '../Components/DraggableMenu';
 function MapView() {
 	const { storyId } = useParams(); // Extract the story ID from the URL
 	const [storyDetails, setStoryDetails] = useState(null);
-	const [userLocation, setUserLocation] = useState([55.471, 9.4868]);
+	const [userLocation, setUserLocation] = useState([0, 0]);
 
 	useEffect(() => {
 		// Fetch the user's current location
