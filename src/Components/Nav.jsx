@@ -9,6 +9,34 @@ import Style from '../assets/styles/components/modules/nav.module.scss';
 
 function Nav() {
 	const [nav, setNav] = useState(false);
+
+	const handleBurgerClick = () => {
+		setNav(!nav);
+		if (!nav) {
+			document.querySelectorAll(`.${Style.burger}`).forEach((burger, index) => {
+				switch (index) {
+					case 0:
+						burger.style.transform = 'rotate(45deg) translate(5px, 5px)';
+						break;
+					case 1:
+						burger.style.opacity = '0';
+						break;
+					case 2:
+						burger.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+						break;
+					default:
+						break;
+				}
+			});
+		} else {
+			document.querySelectorAll(`.${Style.burger}`).forEach((burger) => {
+				burger.style.transform = '';
+				burger.style.opacity = '';
+			});
+		}
+	};
+
+
 	return (
 		<nav>
 			<div className={Style.navContainer}>
@@ -22,9 +50,11 @@ function Nav() {
   					<FontAwesomeIcon icon={faSearch} />
 				</div>
 				<div
-					onClick={() => setNav(!nav)}
-					className='burger-menu'>
-					<div className={Style.burger}></div>
+					onClick={handleBurgerClick}
+					className={Style.burgerMenu}>
+					<div className={`${Style.burger} ${nav ? Style.rotateTopRight : ''}`}></div>
+					<div className={`${Style.burger} ${nav ? Style.opacityZero : ''}`}></div>
+					<div className={`${Style.burger} ${nav ? Style.rotateBottomRight : ''}`}></div>
 				</div>
 			</div>
 			{nav && (
