@@ -52,7 +52,7 @@ svg {
 	color: $neutral-tint-10;
 }
 
-.burgerMenu {
+.burgerMenu { // doesn't close the X unless pressed directly :)
 	position: absolute;
 	z-index: 3;
 	right: 20px;
