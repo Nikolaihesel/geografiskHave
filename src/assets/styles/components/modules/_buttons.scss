@@ -1,11 +1,12 @@
 @use '../../base/variables.scss' as v;
+@use '../../base/typography.scss' as t;
 
 @mixin play-button {
 	height: 60px;
 	width: 60px;
 	border-radius: 50%;
 	border: none;
-	background: orange;
+	background: v.$interactive-color;
 	transform: translateY(45%);
 	box-shadow: v.$drop-shadow;
 	position: relative;
@@ -33,5 +34,5 @@
 	border: none;
 	position: relative;
 	font-size: 2vw;
-	font-weight: bold;
+	font-weight: t.$semi-bold;
 }
