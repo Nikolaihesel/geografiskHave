@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import ticketIcon from '../image/billetIcon.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 // CSS modules
 import Style from '../assets/styles/components/modules/nav.module.scss';
 
 function Nav() {
 	const [nav, setNav] = useState(false);
+	const [showOplevSubMenu, setShowOplevSubMenu] = useState(false);
+	const [showGallerierSubMenu, setShowGallerierSubMenu] = useState(false);
 
 	const handleBurgerClick = () => {
 		setNav(!nav);
@@ -36,6 +38,13 @@ function Nav() {
 		}
 	};
 
+	const handleOplevHavenClick = () => {
+		setShowOplevSubMenu(!showOplevSubMenu);
+	};
+
+	const handleGallerierClick = () => {
+		setShowGallerierSubMenu(!showGallerierSubMenu);
+	};
 
 	return (
 		<nav>
@@ -60,19 +69,48 @@ function Nav() {
 			{nav && (
 				<div className={Style.navMenu}>
 					<ul>
-						<NavLink
-							to='map'
-							onClick={() => setNav(false)}>
-							<li> Map</li>
-						</NavLink>
-						<NavLink
-							to='/'
-							onClick={() => setNav(false)}>
-							<li> Home</li>
-						</NavLink>
-
-						<li>Services</li>
-						<li>Contact</li>
+						<li onClick={handleOplevHavenClick}
+						className={showOplevSubMenu ? Style.oplevHavenOpen : ''}>
+							OPLEV HAVEN
+						<FontAwesomeIcon icon={faCaretDown} className={Style.blackIcon} /></li>
+						
+						{showOplevSubMenu && (
+							<ul>
+								<li>Om Haven</li>
+								<li>Café Lykkefund</li>
+								<li>Kort over haven</li>
+								<li>Godt at vide</li>
+								<li>For børn</li>
+								<NavLink
+									to='/'
+									onClick={() => setNav(false)}>
+									<li> Geografisk Have Fortæller</li>
+								</NavLink>
+								<NavLink
+									to='map'
+									onClick={() => setNav(false)}>
+									<li> Map</li>
+								</NavLink>
+							</ul>
+						)}
+						<li>PRISER / ÅBNINGSTIDER</li>
+						<li
+							onClick={handleGallerierClick}
+							className={showGallerierSubMenu ? Style.gallerierOpen : ''}>
+							GALLERIER
+							<FontAwesomeIcon icon={faCaretDown} className={Style.blackIcon} />
+						</li>
+						{showGallerierSubMenu && (
+							<ul>
+								<li>Hvens kroge</li>
+								<li>Aksel Olsen Galleri</li>
+								<li>Vintergalleri</li>
+								<li>Forårsgalleri</li>
+								<li>Sommergalleri</li>
+								<li>Efterårsgalleri</li>
+							</ul>
+						)}
+						<li>HAVEBLOG</li>
 					</ul>
 				</div>
 			)}

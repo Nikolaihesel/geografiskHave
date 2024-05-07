@@ -90,9 +90,9 @@ svg {
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
-	padding: 1em;
 	width: 100%;
 	text-decoration: none;
+	background-color: $dropdown-menu-color;
 	
 
 	ul {
@@ -108,9 +108,33 @@ svg {
 		li {
 			list-style: none;
 			cursor: pointer;
-			
+			width: 100vw;
+			padding: 1em;
+			&.oplevHavenOpen {
+				background-color: $accent-color; // Change background color when submenu is open
+			  }
+			&.gallerierOpen {
+				background-color: $accent-color; // Change background color when submenu is open
+			}
+
+			.blackIcon {
+				color: black;
+				padding-left: 10px
+			}
+
 		}
 		
+		ul {
+			
+			p {
+				@include t.semibold-paragraph;
+			}
+			li {
+				@include t.paragraph;
+				margin-left: 8px;
+				padding: 0 1em;
+			}
+		}
 	}
 }
 
