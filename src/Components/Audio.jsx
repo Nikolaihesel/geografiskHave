@@ -9,8 +9,9 @@ function Audio({ audioFiles, currentIndex }) {
 	useEffect(() => {
 		if (audioRef.current) {
 			audioRef.current.load();
+			audioRef.current.play();
 		}
-	}, []);
+	}, [currentAudioIndex]);
 
 	const handleNext = () => {
 		setCurrentAudioIndex((prevIndex) => (prevIndex + 1) % audioFiles.length);

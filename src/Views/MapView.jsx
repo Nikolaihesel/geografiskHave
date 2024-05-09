@@ -55,10 +55,7 @@ function MapView() {
 				center={storyDetails?.markerLocations || [55.4721, 9.4929]}
 				zoom={16}
 				style={{ height: '100%', width: '100%' }}>
-				<TileLayer
-					url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-					attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-				/>
+				<TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
 				{storyDetails &&
 					storyDetails.markerLocations &&
 					storyDetails.markerLocations.map((location, index) => (
