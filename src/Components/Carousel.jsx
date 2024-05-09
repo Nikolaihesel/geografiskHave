@@ -75,13 +75,6 @@ function Carousel() {
 							StoryTitle={story.title}
 							StoryId={story.id} // Pass the story ID here
 						/>
-						<p>{story.id}</p>
-						{story.markerLocations &&
-							story.markerLocations.map((location, index) => (
-								<p key={index}>
-									Latitude: {location.lat}, Longitude: {location.lng}
-								</p>
-							))}
 					</div>
 				))}
 			</div>

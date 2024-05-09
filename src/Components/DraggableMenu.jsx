@@ -5,7 +5,7 @@ import { DraggableCore } from 'react-draggable';
 
 import Style from '../assets/styles/components/modules/draggable.module.scss';
 
-function DraggableMenu() {
+function DraggableMenu({ audioData, currentIndex }) {
 	const [footerPosition, setFooterPosition] = useState({ x: 0, y: 0 });
 
 	const handleDrag = (event, ui) => {
@@ -17,30 +17,18 @@ function DraggableMenu() {
 
 	return (
 		<div>
-			
-			<Draggable 
+			<Draggable
 				axis='y'
 				onDrag={handleDrag}
 				bounds={{ top: -550, bottom: 0 }}>
-				<div className={Style.draggable}
-					/*style={{
-						//position: 'absolute',
-						//bottom: '-73vh',
-						//left: '0',
-						//transform: `translate ${footerPosition.y}px)`,
-						//zIndex: '1000',
-						//width: '100%',
-						//height: '80vh',
-						//backgroundColor: 'gray',
-						//color: 'white',
-						//display: 'flex',
-						//justifyContent: 'center',
-						//alignItems: 'flex-start',
-					}}*/>
+				<div className={Style.draggable}>
 					<div className={Style.lineDrag}></div>
 					<h3>Draggable Menu</h3>
 					<div>
-						<Audio />
+						<Audio
+							audioFiles={audioData}
+							currentIndex={currentIndex}
+						/>
 					</div>
 				</div>
 			</Draggable>

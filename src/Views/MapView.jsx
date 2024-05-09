@@ -7,9 +7,10 @@ import { useParams } from 'react-router-dom';
 import { DraggableMenu } from '../Components/DraggableMenu';
 
 function MapView() {
-	const { storyId } = useParams(); // Extract the story ID from the URL
+	const { storyId } = useParams();
 	const [storyDetails, setStoryDetails] = useState(null);
 	const [userLocation, setUserLocation] = useState([0, 0]);
+	const [currentIndex, setCurrentIndex] = useState(0);
 
 	useEffect(() => {
 		// Fetch the user's current location
@@ -34,7 +35,7 @@ function MapView() {
 				const docRef = doc(db, 'stories', storyId);
 				const docSnap = await getDoc(docRef);
 				if (docSnap.exists()) {
-					setStoryDetails(docSnap.data()); // Set the story details
+					setStoryDetails(docSnap.data());
 				} else {
 					console.log('No such document!');
 				}
@@ -53,7 +54,7 @@ function MapView() {
 			<MapContainer
 				center={storyDetails?.markerLocations || [55.4721, 9.4929]}
 				zoom={16}
-				style={{ height: '100%', width: '100%'}}>
+				style={{ height: '100%', width: '100%' }}>
 				<TileLayer
 					url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 					attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -71,8 +72,13 @@ function MapView() {
 					<Popup>Your location</Popup>
 				</Marker>
 			</MapContainer>
-		
-			<DraggableMenu />
+
+			{storyDetails && storyDetails.audio && storyDetails.audio.length >= 0 && (
+				<DraggableMenu
+					currentIndex={currentIndex}
+					audioData={storyDetails.audio}
+				/>
+			)}
 		</div>
 	);
 }

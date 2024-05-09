@@ -40,24 +40,23 @@ function AddStory() {
 		setFile(selectedFile);
 	};
 
-	
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-	
+
 		if (!file) {
 			console.error('No file selected for upload');
 			return;
 		}
-	
+
 		// Upload file to Firebase Storage - not Firestore
 		const storageRef = ref(storage, file.name);
 		const uploadTask = uploadBytesResumable(storageRef, file);
-	
+
 		try {
 			await uploadTask;
 			const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
 			console.log('File uploaded:', downloadURL);
-	
+
 			let audioURLs = [];
 			for (const audioFile of audio) {
 				const audioRef = ref(storage, audioFile.name);
@@ -66,7 +65,7 @@ function AddStory() {
 				const audioURL = await getDownloadURL(uploadAudioTask.snapshot.ref);
 				audioURLs.push(audioURL);
 			}
-	
+
 			// Add the document to Firestore
 			const docRef = await addDoc(collection(db, 'stories'), {
 				title,
@@ -78,26 +77,26 @@ function AddStory() {
 			});
 			console.log('Document added with ID:', docRef.id);
 			toast.success('Story added successfully!', {
-				position: "top-center",
+				position: 'top-center',
 				autoClose: false, // Disable auto-close
 				closeOnClick: true,
 				pauseOnHover: true,
 				draggable: true,
 				closeButton: true, // Show close button
 				progress: undefined,
-			  });
-			  
-			  // Set a timer for the toast
-			  const toastTimer = setTimeout(() => {
+			});
+
+			// Set a timer for the toast
+			const toastTimer = setTimeout(() => {
 				toast.dismiss(); // This will close the toast
 				navigate('/admin'); // Navigate after the toast is closed
-			  }, 5000); // Set the timer for 5 seconds
-			  
-			  toast.onChange((numberOfToastDisplayed) => {
+			}, 5000); // Set the timer for 5 seconds
+
+			toast.onChange((numberOfToastDisplayed) => {
 				if (numberOfToastDisplayed === 0) {
-				  clearTimeout(toastTimer); // Clear the timer if the toast is manually closed
+					clearTimeout(toastTimer); // Clear the timer if the toast is manually closed
 				}
-			  });
+			});
 		} catch (error) {
 			console.error('Error during the upload process:', error);
 		}
@@ -105,11 +104,13 @@ function AddStory() {
 
 	const handleAudioChange = (e) => {
 		const selectedAudio = e.target.files; // This is now a FileList of files
-		setAudio(prevAudio => [...prevAudio, ...selectedAudio]); // This will append new files to the existing audio state
+		setAudio((prevAudio) => [...prevAudio, ...selectedAudio]); // This will append new files to the existing audio state
 	};
 
 	const removeAudio = (indexToRemove) => {
-		setAudio(prevAudio => prevAudio.filter((_, index) => index !== indexToRemove));
+		setAudio((prevAudio) =>
+			prevAudio.filter((_, index) => index !== indexToRemove)
+		);
 	};
 
 	const handleMarkerTextChange = (e) => {
@@ -165,7 +166,6 @@ function AddStory() {
 		[]
 	);
 
-
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
@@ -202,7 +202,7 @@ function AddStory() {
 						<input
 							type='file'
 							onChange={handleAudioChange}
-							multiple // This allows multiple file selection
+							multiple
 						/>
 						<ul>
 							{audio.map((audioFile, index) => (
@@ -227,7 +227,6 @@ function AddStory() {
 					</div>
 				</div>
 				<button type='handleSubmit'>Create Story</button>
-				
 			</form>
 			<div className='map-wrapper'>
 				<MapContainer

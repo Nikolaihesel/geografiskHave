@@ -1,45 +1,28 @@
 import React, { useEffect, useRef, useState } from 'react';
-import audioFile from '../assets/audio/dally.mp3';
-import {
-	getStorage,
-	ref,
-	uploadBytesResumable,
-	getDownloadURL,
-} from 'firebase/storage';
-import { getDoc, collection } from 'firebase/firestore';
-import { db } from '../config/firebase';
 
 import Style from '../assets/styles/components/modules/draggable.module.scss';
 
-function Audio() {
-	const [title, setTitle] = useState('');
-	const [description, setDescription] = useState('');
-	const [file, setFile] = useState(null);
-	const [audio, setAudio] = useState(null);
-	const [markerText, setMarkerText] = useState('');
-	const storage = getStorage();
-	const [markerLocations, setMarkerLocations] = useState([]);
-
+function Audio({ audioFiles, currentIndex }) {
+	const [currentAudioIndex, setCurrentAudioIndex] = useState(currentIndex);
 	const audioRef = useRef(null);
 
-	const onMapMount = async (e) => {
-		async () => {
-			const downloadURL = await getDownloadURL(fetchTask.snapshot.ref);
+	useEffect(() => {
+		if (audioRef.current) {
+			audioRef.current.load();
+		}
+	}, []);
 
-			const docRef = await getDoc(collection(db, 'stories'), {
-				title: title,
-				description: description,
-				image: downloadURL,
-				audio: audio,
-				markerText: markerText,
-				markerLocations: markerLocations,
-			});
-		};
+	const handleNext = () => {
+		setCurrentAudioIndex((prevIndex) => (prevIndex + 1) % audioFiles.length);
+		console.log(currentAudioIndex);
 	};
 
-	useEffect(() => {
-		onMapMount();
-	}, []);
+	const handlePrevious = () => {
+		setCurrentAudioIndex(
+			(prevIndex) => (prevIndex - 1 + audioFiles.length) % audioFiles.length
+		);
+		console.log(currentAudioIndex);
+	};
 
 	return (
 		<div className={Style.draggableWrapper}>
@@ -47,10 +30,14 @@ function Audio() {
 				controls
 				ref={audioRef}>
 				<source
-					src={audioFile}
+					src={audioFiles[currentAudioIndex]}
 					type='audio/mpeg'
 				/>
 			</audio>
+			<div>
+				<button onClick={handlePrevious}>Previous</button>
+				<button onClick={handleNext}>Next</button>
+			</div>
 		</div>
 	);
 }
