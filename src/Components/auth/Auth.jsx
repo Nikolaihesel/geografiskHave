@@ -4,6 +4,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/config/firebase';
 import { useAuth } from '@/Context/AuthContext.jsx';
 
+import style from '@/assets/styles/components/modules/Inputs/_inputs.module.scss';
+
 function Auth() {
 	const navigate = useNavigate();
 	const { user, setUser, isLoggedIn, setIsLoggedIn } = useAuth();
@@ -35,21 +37,26 @@ function Auth() {
 
 	return (
 		<div>
-			<input
-				type='text'
-				placeholder='Email'
-				onChange={(e) => setEmail(e.target.value)}
-			/>
-			<input
-				type='password'
-				placeholder='Password'
-				onChange={(e) => setPassword(e.target.value)}
-			/>
+			<div className={style.inputContainer}>
+				<label>Email</label>
+				<input
+					type='text'
+					placeholder='Email'
+					onChange={(e) => setEmail(e.target.value)}
+				/>
+			</div>
+			<div className={style.inputContainer}>
+				<label>Password</label>
+				<input
+					type='password'
+					placeholder='Password'
+					onChange={(e) => setPassword(e.target.value)}
+				/>
+			</div>
 
 			<button onClick={handleSignIn}> Sign In </button>
 			<button onClick={CheckLogIn}> Am i logged in? </button>
 			<br />
-			{user && <p> {succes}</p>}
 		</div>
 	);
 }

@@ -50,7 +50,7 @@ function MapView() {
 	}, [storyId]);
 
 	return (
-		<div style={{ height: '85vh', width: '100vw' }}>
+		<div style={{ height: '90vh', width: '100vw' }}>
 			<MapContainer
 				center={storyDetails?.markerLocations || [55.4721, 9.4929]}
 				zoom={16}

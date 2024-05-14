@@ -13,6 +13,11 @@ function Audio({ audioFiles, currentIndex }) {
 		}
 	}, [currentAudioIndex]);
 
+	const handlePlayNext = () => {
+		setCurrentAudioIndex((prevIndex) => (prevIndex + 1) % audioFiles.length);
+		console.log(currentAudioIndex);
+	};
+
 	const handleNext = () => {
 		setCurrentAudioIndex((prevIndex) => (prevIndex + 1) % audioFiles.length);
 		console.log(currentAudioIndex);
@@ -29,15 +34,27 @@ function Audio({ audioFiles, currentIndex }) {
 		<div className={Style.draggableWrapper}>
 			<audio
 				controls
-				ref={audioRef}>
+				ref={audioRef}
+				onEnded={handlePlayNext}>
 				<source
 					src={audioFiles[currentAudioIndex]}
 					type='audio/mpeg'
 				/>
 			</audio>
+			<p style={{ padding: '1em' }}>
+				currently playing: {currentAudioIndex + 1 + '/' + audioFiles.length}
+			</p>
 			<div>
-				<button onClick={handlePrevious}>Previous</button>
-				<button onClick={handleNext}>Next</button>
+				<button
+					onTouchStart={handlePrevious}
+					onClick={handlePrevious}>
+					Previous
+				</button>
+				<button
+					onTouchStart={handleNext}
+					onClick={handleNext}>
+					Next
+				</button>
 			</div>
 		</div>
 	);

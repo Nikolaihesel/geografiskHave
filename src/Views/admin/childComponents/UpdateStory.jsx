@@ -1,7 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+	useState,
+	useEffect,
+	useRef,
+	useMemo,
+	useCallback,
+} from 'react';
 import { useParams, NavLink } from 'react-router-dom';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '@/config/firebase';
+import {
+	getStorage,
+	ref,
+	uploadBytesResumable,
+	getDownloadURL,
+} from 'firebase/storage';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //css modules
 import inputStyle from '@/assets/styles/components/modules/Inputs/_inputs.module.scss';
@@ -19,6 +34,13 @@ function UpdateStory() {
 	const [latitude, setLatitude] = useState('');
 	const [markerText, setMarkerText] = useState('');
 	const [markerLocations, setMarkerLocations] = useState([]);
+	const [progress, setProgress] = useState(0);
+
+	//Storage handling
+	const handleChange = (e) => {
+		const selectedFile = e.target.files[0];
+		setFile(selectedFile);
+	};
 
 	useEffect(() => {
 		const fetchStory = async () => {
@@ -93,6 +115,39 @@ function UpdateStory() {
 		));
 	};
 
+	// MAP
+	const [draggable, setDraggable] = useState(false);
+	const [position, setPosition] = useState({ lat: 55.4721, lng: 9.4929 });
+	const markerRef = useRef(null);
+
+	const addMarkerLocation = () => {
+		setMarkerLocations([
+			...markerLocations,
+			{ lat: position.lat.toFixed(6), lng: position.lng.toFixed(6) },
+		]);
+	};
+
+	const handleMarkerLocationChange = (e, index, key) => {
+		const updatedLocations = [...markerLocations];
+		updatedLocations[index][key] = e.target.value;
+		setMarkerLocations(updatedLocations);
+	};
+
+	const toggleDraggable = useCallback(() => {
+		setDraggable((d) => !d);
+	}, []);
+	const eventHandler = useMemo(
+		() => ({
+			dragend() {
+				const marker = markerRef.current;
+				if (marker != null) {
+					setPosition(marker.getLatLng());
+				}
+			},
+		}),
+		[]
+	);
+
 	return (
 		<div>
 			<NavLink to='/admin'>
@@ -134,7 +189,6 @@ function UpdateStory() {
 							type='file'
 							onChange={(e) => setAudio(e.target.files[0])}
 						/>
-						<button>Add Additional Audio File</button>
 					</div>
 				</div>
 				<div className='form-inner-wrap-right'>
@@ -151,6 +205,32 @@ function UpdateStory() {
 				</div>
 				<button type='submit'>Opdater Historie</button>
 			</form>
+
+			<div className='map-wrapper'>
+				<MapContainer
+					center={[55.4721, 9.4929]}
+					zoom={16}
+					style={{ height: '500px', width: '500px' }}>
+					<TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
+					<Marker
+						draggable={draggable}
+						position={position}
+						eventHandlers={eventHandler}
+						ref={markerRef}>
+						<Popup minWidth={90}>
+							<div>
+								<span onClick={toggleDraggable}>
+									{draggable
+										? 'Marker is draggable'
+										: 'Click here to make marker draggable'}
+								</span>
+								<br />
+							</div>
+						</Popup>
+					</Marker>
+				</MapContainer>
+				<button onClick={addMarkerLocation}>Add Marker Location</button>
+			</div>
 		</div>
 	);
 }

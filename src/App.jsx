@@ -15,7 +15,7 @@ import Auth from '@/Components/auth/Auth';
 import { useAuth } from '@/Context/AuthContext';
 
 // tests
-import StorageTest from './Views/admin/childComponents/StorageTest';
+
 import MapTest from '@/Views/MapTest';
 
 function App() {
@@ -56,10 +56,6 @@ function App() {
 						<Route
 							path='/admin'
 							element={<AdminMain />}
-						/>
-						<Route
-							path='/teststorage'
-							element={<StorageTest />}
 						/>
 					</Route>
 				</Routes>

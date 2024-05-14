@@ -228,6 +228,7 @@ function AddStory() {
 				</div>
 				<button type='handleSubmit'>Create Story</button>
 			</form>
+			<div>{progress}% Uploaded</div>
 			<div className='map-wrapper'>
 				<MapContainer
 					center={[55.4721, 9.4929]}
@@ -253,7 +254,6 @@ function AddStory() {
 				</MapContainer>
 				<button onClick={addMarkerLocation}>Add Marker Location</button>
 			</div>
-			<div>{progress}% Uploaded</div>
 		</div>
 	);
 }

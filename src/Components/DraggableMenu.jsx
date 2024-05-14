@@ -23,7 +23,7 @@ function DraggableMenu({ audioData, currentIndex }) {
 				bounds={{ top: -550, bottom: 0 }}>
 				<div className={Style.draggable}>
 					<div className={Style.lineDrag}></div>
-					<h3>Draggable Menu</h3>
+
 					<div>
 						<Audio
 							audioFiles={audioData}
