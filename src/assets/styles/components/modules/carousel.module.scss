@@ -38,11 +38,11 @@
 	width: 10px;
 	height: 10px;
 	border-radius: 50%;
-	background-color: v.$grey-dark-color;
+	background-color: v.$accent-color;
 	margin: 0 5px;
 	cursor: pointer;
 }
 
 .Active {
-	background-color: blue;
+	background-color: v.$interactive-color;
 }

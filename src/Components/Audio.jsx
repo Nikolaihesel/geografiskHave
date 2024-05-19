@@ -1,4 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+	faRotateRight,
+	faRotateLeft,
+	faPlay,
+	faPause,
+} from '@fortawesome/free-solid-svg-icons';
 
 function Audio({ audioFiles, currentIndex }) {
 	const [currentAudioIndex, setCurrentAudioIndex] = useState(currentIndex);
@@ -12,23 +19,18 @@ function Audio({ audioFiles, currentIndex }) {
 			audioRef.current.load();
 			audioRef.current.play();
 		}
+		setIsPlaying(true);
 	}, [currentAudioIndex]);
-
-	const handlePlayNext = () => {
-		setCurrentAudioIndex((prevIndex) => (prevIndex + 1) % audioFiles.length);
-		console.log(currentAudioIndex);
-	};
 
 	const handleNext = () => {
 		setCurrentAudioIndex((prevIndex) => (prevIndex + 1) % audioFiles.length);
-		console.log(currentAudioIndex);
+		setIsPlaying(true);
 	};
 
 	const handlePrevious = () => {
 		setCurrentAudioIndex(
 			(prevIndex) => (prevIndex - 1 + audioFiles.length) % audioFiles.length
 		);
-		console.log(currentAudioIndex);
 	};
 
 	const formatTime = (time) => {
@@ -100,7 +102,10 @@ function Audio({ audioFiles, currentIndex }) {
 						cursor: 'pointer',
 						margin: '0 10px',
 					}}>
-					⏪
+					<FontAwesomeIcon
+						icon={faRotateLeft}
+						style={{ color: 'orange' }}
+					/>
 				</button>
 				<button
 					onTouchStart={handlePlayPause}
@@ -112,7 +117,17 @@ function Audio({ audioFiles, currentIndex }) {
 						cursor: 'pointer',
 						margin: '0 10px',
 					}}>
-					{isPlaying ? '⏸' : '▶️'}
+					{isPlaying && isPlaying ? (
+						<FontAwesomeIcon
+							icon={faPause}
+							style={{ color: 'orange' }}
+						/>
+					) : (
+						<FontAwesomeIcon
+							icon={faPlay}
+							style={{ color: 'orange' }}
+						/>
+					)}
 				</button>
 				<button
 					onTouchStart={handleNext}
@@ -124,7 +139,10 @@ function Audio({ audioFiles, currentIndex }) {
 						cursor: 'pointer',
 						margin: '0 10px',
 					}}>
-					⏩
+					<FontAwesomeIcon
+						icon={faRotateRight}
+						style={{ color: 'orange' }}
+					/>
 				</button>
 			</div>
 			<input

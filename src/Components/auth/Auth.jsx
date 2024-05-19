@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/config/firebase';
 import { useAuth } from '@/Context/AuthContext.jsx';
-
 import style from '@/assets/styles/components/modules/Inputs/_inputs.module.scss';
 
 function Auth() {
@@ -11,24 +10,26 @@ function Auth() {
 	const { user, setUser, isLoggedIn, setIsLoggedIn } = useAuth();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [succes, setSucces] = useState('');
+	const [success, setSuccess] = useState('');
 
 	const handleSignIn = async () => {
-		signInWithEmailAndPassword(auth, email, password)
-			.then((userCredential) => {
-				const user = userCredential.user;
-				setUser(user);
-				setIsLoggedIn(true);
-				setSucces('User signed in');
-				navigate('/admin/');
-				console.log('User signed in');
-			})
-
-			.catch((error) => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				console.error('Error signing in:', errorCode, errorMessage);
-			});
+		try {
+			const userCredential = await signInWithEmailAndPassword(
+				auth,
+				email,
+				password
+			);
+			const user = userCredential.user;
+			setUser(user);
+			setIsLoggedIn(true);
+			setSuccess('User signed in');
+			navigate('/admin/');
+			console.log('User signed in');
+		} catch (error) {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			console.error('Error signing in:', errorCode, errorMessage);
+		}
 	};
 
 	const CheckLogIn = () => {
@@ -55,7 +56,7 @@ function Auth() {
 			</div>
 
 			<button onClick={handleSignIn}> Sign In </button>
-			<button onClick={CheckLogIn}> Am i logged in? </button>
+			<button onClick={CheckLogIn}> Am I logged in? </button>
 			<br />
 		</div>
 	);

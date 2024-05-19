@@ -15,8 +15,6 @@ import ToastSucces from '@/Components/Toast/ToastSucces';
 // CSS modules
 import inputStyle from '../../../assets/styles/components/modules/Inputs/_inputs.module.scss';
 
-//TODO refactor this component, to some smaller components
-
 function AddStory() {
 	//form
 	const [title, setTitle] = useState('');

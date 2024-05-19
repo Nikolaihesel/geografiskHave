@@ -49,31 +49,47 @@ function Nav() {
 	return (
 		<nav>
 			<div className={Style.navContainer}>
-			<NavLink to='/'> {/* Wrap this line around the h1 tag */}
-          <h1>Geografisk Have</h1>
-        </NavLink> {/* Close NavLink here */}
+				<NavLink to='/'>
+					{' '}
+					{/* Wrap this line around the h1 tag */}
+					<h1>Geografisk Have</h1>
+				</NavLink>{' '}
+				{/* Close NavLink here */}
 				<div className={Style.ticketIcon}>
-  					<img className={Style.ticketIconYellow} src={ticketIcon} alt="Ticket Icon" />
+					<img
+						className={Style.ticketIconYellow}
+						src={ticketIcon}
+						alt='Ticket Icon'
+					/>
 				</div>
 				<div className='search-icon'>
-  					<FontAwesomeIcon icon={faSearch} />
+					<FontAwesomeIcon icon={faSearch} />
 				</div>
 				<div
 					onClick={handleBurgerClick}
 					className={Style.burgerMenu}>
-					<div className={`${Style.burger} ${nav ? Style.rotateTopRight : ''}`}></div>
-					<div className={`${Style.burger} ${nav ? Style.opacityZero : ''}`}></div>
-					<div className={`${Style.burger} ${nav ? Style.rotateBottomRight : ''}`}></div>
+					<div
+						className={`${Style.burger} ${
+							nav ? Style.rotateTopRight : ''
+						}`}></div>
+					<div
+						className={`${Style.burger} ${nav ? Style.opacityZero : ''}`}></div>
+					<div
+						className={`${Style.burger} ${
+							nav ? Style.rotateBottomRight : ''
+						}`}></div>
 				</div>
 			</div>
 			{nav && (
 				<div className={Style.navMenu}>
 					<ul>
-						<li onClick={handleOplevHavenClick}
-						className={showOplevSubMenu ? Style.oplevHavenOpen : ''}>
+						<li
+							onClick={handleOplevHavenClick}
+							className={showOplevSubMenu ? Style.oplevHavenOpen : ''}>
 							OPLEV HAVEN
-						<FontAwesomeIcon icon={faCaretDown} className={Style.blackIcon} /></li>
-						
+							<FontAwesomeIcon icon={faCaretDown} />
+						</li>
+
 						{showOplevSubMenu && (
 							<ul>
 								<li>Om Haven</li>
@@ -98,7 +114,10 @@ function Nav() {
 							onClick={handleGallerierClick}
 							className={showGallerierSubMenu ? Style.gallerierOpen : ''}>
 							GALLERIER
-							<FontAwesomeIcon icon={faCaretDown} className={Style.blackIcon} />
+							<FontAwesomeIcon
+								icon={faCaretDown}
+								className={Style.blackIcon}
+							/>
 						</li>
 						{showGallerierSubMenu && (
 							<ul>

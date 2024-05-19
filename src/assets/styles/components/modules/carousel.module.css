@@ -75,11 +75,11 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: #6c6565;
+  background-color: #fee174;
   margin: 0 5px;
   cursor: pointer;
 }
 
 .Active {
-  background-color: blue;
+  background-color: #f3a25a;
 }/*# sourceMappingURL=carousel.module.css.map */
