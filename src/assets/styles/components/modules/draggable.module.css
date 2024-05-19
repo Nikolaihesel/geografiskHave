@@ -39,50 +39,33 @@
 	opacity: v.$dark-shadow-opacity;
 }
 */
-.CarouselCard {
-  flex: 0 0 auto;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+.draggableWrapper {
+  text-align: center;
+  justify-content: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  border-radius: 2px;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1803921569);
-  margin: 2em 0;
+  border: solid #fff 1px;
 }
-.CarouselCard img {
-  width: 250px;
-  height: 280px;
-}
-.CarouselCard p {
-  font-family: "open sans", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #000;
-  margin: 1em 0;
-}
-.CarouselCard button {
-  height: 60px;
-  width: 60px;
-  border-radius: 50%;
-  border: none;
-  background: #f3a25a;
-  transform: translateY(45%);
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1803921569);
-  position: relative;
-}
-.CarouselCard button::after {
-  content: "";
+
+.draggable {
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-45%, -50%);
-  width: 0;
-  height: 0;
-  border-top: 12px solid transparent;
-  border-bottom: 12px solid transparent;
-  border-left: 25px solid white;
-  background-size: contain;
-}/*# sourceMappingURL=carouselCard.module.css.map */
+  bottom: -620px;
+  width: 100%;
+  height: 80vh;
+  border-radius: 16px 16px 0px 0px;
+  background-color: #fff;
+  border: solid #eee 1px;
+}
+
+.lineDrag {
+  border: solid #adadad 3px;
+  border-radius: 8px;
+  margin: 1em;
+  width: 20%;
+  align-self: center;
+}/*# sourceMappingURL=draggable.module.css.map */

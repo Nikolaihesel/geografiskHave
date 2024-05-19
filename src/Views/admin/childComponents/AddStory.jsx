@@ -2,17 +2,15 @@ import React, { useState, useRef, useMemo, useCallback } from 'react';
 import {
 	getStorage,
 	ref,
-	uploadBytes,
 	uploadBytesResumable,
 	getDownloadURL,
 } from 'firebase/storage';
 import { addDoc, collection } from 'firebase/firestore';
-import { db } from '../../../config/firebase';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { db } from '@/config/firebase';
 
-import { useNavigate } from 'react-router-dom';
+//Components
+import MapStory from '@/Components/MapParts/MapStory';
+import ToastSucces from '@/Components/Toast/ToastSucces';
 
 // CSS modules
 import inputStyle from '../../../assets/styles/components/modules/Inputs/_inputs.module.scss';
@@ -20,24 +18,34 @@ import inputStyle from '../../../assets/styles/components/modules/Inputs/_inputs
 //TODO refactor this component, to some smaller components
 
 function AddStory() {
+	//form
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
 	const [file, setFile] = useState(null);
 	const [audio, setAudio] = useState([]);
-	const [markerText, setMarkerText] = useState('');
-	const storage = getStorage();
-	const [markerLocations, setMarkerLocations] = useState([]);
-	const navigate = useNavigate();
-
-	// Map
-	const [draggable, setDraggable] = useState(false);
-	const [position, setPosition] = useState({ lat: 55.4721, lng: 9.4929 });
-	const markerRef = useRef(null);
-
 	const [progress, setProgress] = useState(0);
+	const storage = getStorage();
+	const [success, setSuccess] = useState(false);
+	// Map
+	const [markerText, setMarkerText] = useState('');
+	const [markerLocations, setMarkerLocations] = useState([]);
+
+	//
+
 	const handleChange = (e) => {
 		const selectedFile = e.target.files[0];
 		setFile(selectedFile);
+	};
+
+	const handleAudioChange = (e) => {
+		const selectedAudio = e.target.files; // This is now a FileList of files
+		setAudio((prevAudio) => [...prevAudio, ...selectedAudio]); // This will append new files to the existing audio state
+	};
+
+	const removeAudio = (indexToRemove) => {
+		setAudio((prevAudio) =>
+			prevAudio.filter((_, index) => index !== indexToRemove)
+		);
 	};
 
 	const handleSubmit = async (e) => {
@@ -75,99 +83,20 @@ function AddStory() {
 				markerText,
 				markerLocations,
 			});
-			console.log('Document added with ID:', docRef.id);
-			toast.success('Story added successfully!', {
-				position: 'top-center',
-				autoClose: false, // Disable auto-close
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				closeButton: true, // Show close button
-				progress: undefined,
-			});
 
-			// Set a timer for the toast
-			const toastTimer = setTimeout(() => {
-				toast.dismiss(); // This will close the toast
-				navigate('/admin'); // Navigate after the toast is closed
-			}, 5000); // Set the timer for 5 seconds
-
-			toast.onChange((numberOfToastDisplayed) => {
-				if (numberOfToastDisplayed === 0) {
-					clearTimeout(toastTimer); // Clear the timer if the toast is manually closed
-				}
-			});
+			setSuccess(true);
 		} catch (error) {
 			console.error('Error during the upload process:', error);
 		}
 	};
 
-	const handleAudioChange = (e) => {
-		const selectedAudio = e.target.files; // This is now a FileList of files
-		setAudio((prevAudio) => [...prevAudio, ...selectedAudio]); // This will append new files to the existing audio state
+	const handleToastDismiss = () => {
+		setSuccess(false);
 	};
-
-	const removeAudio = (indexToRemove) => {
-		setAudio((prevAudio) =>
-			prevAudio.filter((_, index) => index !== indexToRemove)
-		);
-	};
-
-	const handleMarkerTextChange = (e) => {
-		setMarkerText(e.target.value);
-	};
-
-	const renderMarkerInputs = () => {
-		return markerLocations.map((location, index) => (
-			<div
-				className={inputStyle.inputContainer}
-				key={index}>
-				<label>Longitude</label>
-				<input
-					type='text'
-					value={location.lng}
-					onChange={(e) => handleMarkerLocationChange(e, index, 'lng')}
-				/>
-				<label>Latitude</label>
-				<input
-					type='text'
-					value={location.lat}
-					onChange={(e) => handleMarkerLocationChange(e, index, 'lat')}
-				/>
-			</div>
-		));
-	};
-
-	const addMarkerLocation = () => {
-		setMarkerLocations([
-			...markerLocations,
-			{ lat: position.lat.toFixed(6), lng: position.lng.toFixed(6) },
-		]);
-	};
-
-	const handleMarkerLocationChange = (e, index, key) => {
-		const updatedLocations = [...markerLocations];
-		updatedLocations[index][key] = e.target.value;
-		setMarkerLocations(updatedLocations);
-	};
-
-	const toggleDraggable = useCallback(() => {
-		setDraggable((d) => !d);
-	}, []);
-	const eventHandler = useMemo(
-		() => ({
-			dragend() {
-				const marker = markerRef.current;
-				if (marker != null) {
-					setPosition(marker.getLatLng());
-				}
-			},
-		}),
-		[]
-	);
 
 	return (
 		<div>
+			{success && <ToastSucces onDismiss={handleToastDismiss} />}
 			<form onSubmit={handleSubmit}>
 				<div className='form-inner-wrap-left'>
 					<div className={inputStyle.inputContainer}>
@@ -214,46 +143,16 @@ function AddStory() {
 						</ul>
 					</div>
 				</div>
-				<div className='form-inner-wrap-right'>
-					{renderMarkerInputs()}
-					<div className={inputStyle.inputContainer}>
-						<label>Marker Text</label>
-						<input
-							type='text'
-							placeholder='Marker text'
-							value={markerText}
-							onChange={handleMarkerTextChange}
-						/>
-					</div>
-				</div>
+				<div className='form-inner-wrap-right'></div>
 				<button type='handleSubmit'>Create Story</button>
 			</form>
 			<div>{progress}% Uploaded</div>
-			<div className='map-wrapper'>
-				<MapContainer
-					center={[55.4721, 9.4929]}
-					zoom={16}
-					style={{ height: '500px', width: '500px' }}>
-					<TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-					<Marker
-						draggable={draggable}
-						position={position}
-						eventHandlers={eventHandler}
-						ref={markerRef}>
-						<Popup minWidth={90}>
-							<div>
-								<span onClick={toggleDraggable}>
-									{draggable
-										? 'Marker is draggable'
-										: 'Click here to make marker draggable'}
-								</span>
-								<br />
-							</div>
-						</Popup>
-					</Marker>
-				</MapContainer>
-				<button onClick={addMarkerLocation}>Add Marker Location</button>
-			</div>
+			<MapStory
+				markerLocations={markerLocations}
+				setMarkerLocations={setMarkerLocations}
+				markerText={markerText}
+				setMarkerText={setMarkerText}
+			/>
 		</div>
 	);
 }
