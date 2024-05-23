@@ -55,7 +55,6 @@ function Carousel() {
 
 		const container = carouselRef.current;
 		container.addEventListener('scroll', handleScroll);
-
 		return () => {
 			container.removeEventListener('scroll', handleScroll);
 		};

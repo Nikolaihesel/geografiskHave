@@ -27,3 +27,11 @@ dist-ssr
 config
 
 
+storage.rules
+.firebase/hosting.YnVpbGQ.cache
+.firebase/hosting.ZGlzdA.cache
+.firebaserc
+build/index.html
+firebase.json
+firestore.indexes.json
+firestore.rules

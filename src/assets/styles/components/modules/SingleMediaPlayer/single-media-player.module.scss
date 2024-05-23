@@ -1,0 +1,26 @@
+@use '../../../base/variables.scss' as v;
+@use '../../../mixins/typography-mixins.scss' as t;
+@use '../buttons' as b;
+
+.playerComponent {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	gap: 1em;
+	padding: 1em 2em;
+	border-radius: 2px;
+	background-color: v.$neutral-tint-10;
+
+	box-shadow: v.$drop-shadow;
+	overflow: auto;
+	width: 100%;
+}
+
+.playerComponentTitle {
+	@include t.semibold-paragraph;
+	flex-grow: 1;
+}
+
+.playerComponentButton {
+	@include b.play-button-center;
+}

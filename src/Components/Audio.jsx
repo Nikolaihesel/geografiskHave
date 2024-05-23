@@ -6,6 +6,11 @@ import {
 	faPlay,
 	faPause,
 } from '@fortawesome/free-solid-svg-icons';
+//Components
+import AudioPlayPart from '@/Components/AudioPlayPart/AudioPlayPart';
+
+//Css
+import Component from '@/assets/styles/components/modules/MainAudioPlayer/main-audio-player.module.scss';
 
 function Audio({ audioFiles, currentIndex }) {
 	const [currentAudioIndex, setCurrentAudioIndex] = useState(currentIndex);
@@ -13,13 +18,15 @@ function Audio({ audioFiles, currentIndex }) {
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [currentTime, setCurrentTime] = useState(0);
 	const [duration, setDuration] = useState(0);
+	const [popup, setPopup] = useState(true);
 
 	useEffect(() => {
 		if (audioRef.current) {
 			audioRef.current.load();
-			audioRef.current.play();
+			// audioRef.current.play(); Autoplay not okay in some browsers so we will not use it
+		} else {
+			audioRef.current.pause();
 		}
-		setIsPlaying(true);
 	}, [currentAudioIndex]);
 
 	const handleNext = () => {
@@ -44,7 +51,9 @@ function Audio({ audioFiles, currentIndex }) {
 		if (isPlaying) {
 			audio.pause();
 		} else {
-			audio.play();
+			audio.play().catch((error) => {
+				console.error('Error:', error);
+			});
 		}
 		setIsPlaying(!isPlaying);
 	};
@@ -58,13 +67,12 @@ function Audio({ audioFiles, currentIndex }) {
 	};
 
 	return (
-		<div
-			style={{
-				width: '100%',
-				maxWidth: '400px',
-				margin: 'auto',
-				textAlign: 'center',
-			}}>
+		<div className={Component.audioWrapper}>
+			{popup && (
+				<div className='pop-up'>
+					<button onClick={() => setPopup(!popup)}>Use Audio</button>
+				</div>
+			)}
 			<audio
 				ref={audioRef}
 				onTimeUpdate={handleTimeUpdate}
@@ -75,73 +83,66 @@ function Audio({ audioFiles, currentIndex }) {
 				currently playing: {currentAudioIndex + 1} / {audioFiles.length}
 			</p>
 
-			<div
-				style={{
-					position: 'relative',
-					width: '100%',
-					height: '5px',
-					background: 'lightgray',
-					margin: '10px 0',
-				}}>
+			<div className={Component.timeIndicator}>
 				<div
 					style={{
 						position: 'absolute',
 						height: '100%',
+						borderRadius: '10px',
 						background: 'green',
 						width: `${(currentTime / duration) * 100}%`,
 					}}></div>
 			</div>
-			<div>
+			<div className={Component.numIndicator}>
+				<span>{formatTime(currentTime)}</span>
+				<span>{formatTime(duration)}</span>
+			</div>
+			<div
+				style={{
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					gap: '1.5em',
+				}}>
 				<button
-					onTouchStart={handlePrevious}
 					onClick={handlePrevious}
 					style={{
 						background: 'none',
 						border: 'none',
-						fontSize: '1.5em',
-						cursor: 'pointer',
-						margin: '0 10px',
 					}}>
 					<FontAwesomeIcon
 						icon={faRotateLeft}
-						style={{ color: 'orange' }}
+						className={Component.audioControlButtons}
 					/>
 				</button>
 				<button
-					onTouchStart={handlePlayPause}
 					onClick={handlePlayPause}
 					style={{
 						background: 'none',
 						border: 'none',
-						fontSize: '1.5em',
-						cursor: 'pointer',
-						margin: '0 10px',
+						touchAction: 'none',
 					}}>
 					{isPlaying && isPlaying ? (
 						<FontAwesomeIcon
 							icon={faPause}
-							style={{ color: 'orange' }}
+							className={Component.audioControlButtons}
 						/>
 					) : (
 						<FontAwesomeIcon
 							icon={faPlay}
-							style={{ color: 'orange' }}
+							className={Component.audioControlButtons}
 						/>
 					)}
 				</button>
 				<button
-					onTouchStart={handleNext}
 					onClick={handleNext}
 					style={{
 						background: 'none',
 						border: 'none',
-						fontSize: '1.5em',
-						cursor: 'pointer',
-						margin: '0 10px',
 					}}>
 					<FontAwesomeIcon
 						icon={faRotateRight}
-						style={{ color: 'orange' }}
+						className={Component.audioControlButtons}
 					/>
 				</button>
 			</div>
@@ -159,70 +160,13 @@ function Audio({ audioFiles, currentIndex }) {
 					opacity: '0',
 				}}
 			/>
-			<div
-				style={{
-					display: 'flex',
-					justifyContent: 'space-between',
-					width: '100%',
-					padding: '10px 0',
-				}}>
-				<span>{formatTime(currentTime)}</span>
-				<span>{formatTime(duration)}</span>
-			</div>
 
 			{audioFiles.map((audio, index) => (
-				<div
-					key={index}
-					style={{
-						display: 'flex',
-						alignItems: 'center',
-						padding: '10px',
-						border: '1px solid #D9D9D9',
-						borderRadius: '8px',
-						backgroundColor: '#FFFFFF',
-						margin: '10px 0',
-						boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-						overflow: 'auto',
-					}}>
-					<span
-						style={{
-							flexGrow: 1,
-							fontSize: '16px',
-							fontWeight: '500',
-							color: '#000000',
-						}}>
-						Geografisk Haves Historie - Del {index + 1}
-					</span>
-					<button
-						style={{
-							width: '40px',
-							height: '40px',
-							backgroundColor: '#EDA466',
-							border: 'none',
-							borderRadius: '50%',
-							display: 'flex',
-							justifyContent: 'center',
-							alignItems: 'center',
-							cursor: 'pointer',
-							margin: '0 10px',
-						}}>
-						<audio
-							controls
-							style={{ display: 'none' }}>
-							<source
-								src={audio}
-								type='audio/mpeg'
-							/>
-						</audio>
-						<svg
-							xmlns='http://www.w3.org/2000/svg'
-							viewBox='0 0 24 24'
-							fill='#FFFFFF'
-							width='24px'
-							height='24px'>
-							<path d='M8 5v14l11-7z' />
-						</svg>
-					</button>
+				<div key={index}>
+					<AudioPlayPart
+						Index={index}
+						audio={audio}
+					/>
 				</div>
 			))}
 		</div>

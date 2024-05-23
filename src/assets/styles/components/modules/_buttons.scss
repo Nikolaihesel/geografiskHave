@@ -25,6 +25,30 @@
 		background-size: contain;
 	}
 }
+@mixin play-button-center {
+	height: 60px;
+	width: 60px;
+	border-radius: 50%;
+	border: none;
+	background: v.$interactive-color;
+
+	box-shadow: v.$drop-shadow;
+	position: relative;
+
+	&::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-45%, -50%);
+		width: 0;
+		height: 0;
+		border-top: 12px solid transparent;
+		border-bottom: 12px solid transparent;
+		border-left: 25px solid white;
+		background-size: contain;
+	}
+}
 
 @mixin button {
 	margin: 1vw;
@@ -35,4 +59,11 @@
 	position: relative;
 	font-size: 2vw;
 	font-weight: t.$semi-bold;
+}
+
+@mixin audio-interact-button {
+	color: v.$interactive-color;
+	cursor: pointer;
+	height: 35px;
+	margin-bottom: 1em;
 }

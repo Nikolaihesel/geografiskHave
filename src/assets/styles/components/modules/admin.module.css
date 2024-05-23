@@ -48,7 +48,8 @@
   gap: 10px;
 }
 
-.adminPanel, .addStory {
+.adminPanel,
+.addStory {
   color: #000;
   background: #fee174;
   font-size: 15px;
@@ -58,12 +59,14 @@
   cursor: pointer;
   border-radius: 9px;
 }
-.adminPanel:hover, .addStory:hover {
-  background-color: #DDBA4A;
+.adminPanel:hover,
+.addStory:hover {
+  background-color: #ddba4a;
 }
-.adminPanel:active, .addStory:active {
+.adminPanel:active,
+.addStory:active {
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 5px 10px rgba(0, 0, 0, 0.5);
-  background-color: #DDBA4A;
+  background-color: #ddba4a;
 }
 
 .deleteButton {

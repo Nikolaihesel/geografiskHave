@@ -53,15 +53,15 @@
   margin: 2em 0;
 }
 .CarouselCard img {
-  width: 250px;
-  height: 280px;
+  width: 210px;
+  height: 240px;
 }
 .CarouselCard p {
   font-family: "open sans", sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: #000;
-  margin: 1em 0;
+  margin: 0.5em 0;
 }
 .CarouselCard button {
   height: 60px;

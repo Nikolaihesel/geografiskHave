@@ -17,9 +17,9 @@
 	flex-direction: column;
 	z-index: 1000;
 	position: absolute;
-	bottom: -620px;
+	bottom: -550px;
 	width: 100%;
-	height: 80vh;
+	height: 90vh;
 	border-radius: 16px 16px 0px 0px;
 	background-color: $neutral-tint-10;
 	border: solid $neutral-tint-40 1px;
@@ -31,4 +31,7 @@
 	margin: 1em;
 	width: 20%;
 	align-self: center;
+	height: 5px;
+	background: $grey-medium-color;
+	cursor: grab;
 }
