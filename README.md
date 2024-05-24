@@ -89,21 +89,29 @@ Dette projekt omahndler et geografisk kort og en audio player med historier, som
 ## Kontakt
 Nedenfor står kontakt opysningerne for de webudviklings studerende der har været en del af dette projekt:
 
-Emilie <br>
+Emilie 
+<br>
 Email:
-Github:
+<br>
+Github: (https://github.com/Reitc)
 
-Nikolaj <br>
+Nikolaj 
+<br>
 Email:
-Github:
+<br>
+Github: (https://github.com/Nikolaihesel)
 
-Nicole <br>
+Nicole 
+<br>
 Email:
-Github:
+<br>
+Github: (https://github.com/nicolelefevre98)
 
-Maria <br>
-Email:
-Github:
+Maria Dimon
+<br>
+Email: mndi32110@edu.ucl.dk 
+<br>
+Github: (https://github.com/M-Dimon)
 <p align="left">(<a href="#readme-top">Til Toppen</a>)</p>
 
 
