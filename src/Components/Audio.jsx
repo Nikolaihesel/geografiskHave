@@ -29,17 +29,6 @@ function Audio({ audioFiles, currentIndex }) {
 		}
 	}, [currentAudioIndex]);
 
-	const handleNext = () => {
-		setCurrentAudioIndex((prevIndex) => (prevIndex + 1) % audioFiles.length);
-		setIsPlaying(true);
-	};
-
-	const handlePrevious = () => {
-		setCurrentAudioIndex(
-			(prevIndex) => (prevIndex - 1 + audioFiles.length) % audioFiles.length
-		);
-	};
-
 	const formatTime = (time) => {
 		const minutes = Math.floor(time / 60);
 		const seconds = Math.floor(time % 60);
@@ -56,6 +45,16 @@ function Audio({ audioFiles, currentIndex }) {
 			});
 		}
 		setIsPlaying(!isPlaying);
+	};
+	const handleNext = () => {
+		setCurrentAudioIndex((prevIndex) => (prevIndex + 1) % audioFiles.length);
+		setIsPlaying(true);
+	};
+
+	const handlePrevious = () => {
+		setCurrentAudioIndex(
+			(prevIndex) => (prevIndex - 1 + audioFiles.length) % audioFiles.length
+		);
 	};
 
 	const handleTimeUpdate = () => {

@@ -13,7 +13,9 @@ import MapStory from '@/Components/MapParts/MapStory';
 import ToastSucces from '@/Components/Toast/ToastSucces';
 
 // CSS modules
-import inputStyle from '../../../assets/styles/components/modules/Inputs/_inputs.module.scss';
+
+import inputStyle from '@/assets/styles/components/modules/Inputs/_inputs.module.scss';
+import Style from '@/assets/styles/components/modules/admin.module.scss';
 
 function AddStory() {
 	//form
@@ -93,10 +95,10 @@ function AddStory() {
 	};
 
 	return (
-		<div>
+		<div className={Style.addStoryWrapper}>
 			{success && <ToastSucces onDismiss={handleToastDismiss} />}
 			<form onSubmit={handleSubmit}>
-				<div className='form-inner-wrap-left'>
+				<div className={Style.formWrap}>
 					<div className={inputStyle.inputContainer}>
 						<label>Title</label>
 						<input
@@ -123,28 +125,28 @@ function AddStory() {
 						/>
 					</div>
 				</div>
-				<div className='form-inner-wrap-middle'>
-					<div className={inputStyle.inputContainer}>
-						<label>Audio Files</label>
-						<input
-							type='file'
-							onChange={handleAudioChange}
-							multiple
-						/>
-						<ul>
-							{audio.map((audioFile, index) => (
-								<li key={index}>
-									{audioFile.name}
-									<button onClick={() => removeAudio(index)}>Remove</button>
-								</li>
-							))}
-						</ul>
-					</div>
+
+				<div className={inputStyle.inputContainer}>
+					<label>Audio Files</label>
+					<input
+						type='file'
+						onChange={handleAudioChange}
+						multiple
+					/>
+					<ul>
+						{audio.map((audioFile, index) => (
+							<li key={index}>
+								{audioFile.name}
+								<button onClick={() => removeAudio(index)}>Remove</button>
+							</li>
+						))}
+					</ul>
 				</div>
+
 				<div className='form-inner-wrap-right'></div>
 				<button type='handleSubmit'>Create Story</button>
 			</form>
-			<div>{progress}% Uploaded</div>
+
 			<MapStory
 				markerLocations={markerLocations}
 				setMarkerLocations={setMarkerLocations}
