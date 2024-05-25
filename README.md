@@ -4,49 +4,48 @@
 <a name="readme-top"></a>
 
 <!-- TABLE OF CONTENTS -->
-## Indholdsfortegnelse
+## Table of Contents
 <details>
-  <summary>Indholdsfortegnelse</summary>
+  <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">Om Projektet</a>
+      <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#built-with">Bygget Med</a></li>
+        <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Opstart</a>
+      <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Krav</a></li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Brug</a></li>
-    <li><a href="#contact">Kontakt</a></li>
-    <li><a href="#referances">Referancer</a></li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
 
-
 <!-- ABOUT THE PROJECT -->
-## Om Projektet
+## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](link til projekt site)
+[![Product Name Screen Shot][product-screenshot]](link to project page)
 
-Dette projekt er en del af Modern Frontend Development faget på webudviklings uddannelsen 2 semester hos UCL erhvervsakademi og professionshøjskole. 
+This project is a part of the final exam for the Modern Frontend Development class, for the seccond semester of the webdevelopment course at UCL Erhvervsakademi & Professionshøjskole in Odense. 
 
-Der er til dette fag og denne opgave blevet opsat et tværfagligt samarbejde mellem webudvikling, Digital koncept udvikling samt, IT Og Økonomi studerende, og klienten Geografisk Have Kolding. 
+For this class exam project, there has been a multi-course collaboration between the students in Webdevelopment, Digital Concept Development, as well as the IT and Ecconomi course, all of whom have worked towards creating a solution for the client Geografisk Have Kolding. 
 
-Klienten Geografisk Have Kolding, er kommet med et problem som Digital Koncept udvikling har lavet en løsning til, hvoefter det er blevet overleveret til webudviklerne som skal sørge for at kode løsningen. Paralelt med at Digital Koncept Udvikling har skabt design og løsning har IT og Økonomi været inde og kortlægge opgaverne i projektet, samt lavet regnskaberne for løsningen.
+The client Geografisk Have Kolding, has presented a problem which the Digital Concept Development students has created a prototype solution for, which has then been handed off to the Webdevelopers, whom are tasked with creating the actual application following the design and material from the handoff. During this process the IT and Ecconomi students have been tasked with overseeing the process, while working on creating detailed buissines proposals and calculating the cost of the project.
 
-Denne readme er en del af det repository som webudvikler studerende har lavet i forbindelse med dette projekt og indeholder den kode der er lavet til at oprette den overleverede løsning. 
+This readme is a part of the repository which the Webdevelopment team has made in connection to this project, and contains the finished product, which they have created from the handoff material. 
 
-<p align="left">(<a href="#readme-top">Til Toppen</a>)</p>
+<p align="left">(<a href="#readme-top">To the Top</a>)</p>
 
 ### Built With
 
-Til dette projekt er der gjort brug af følgende frameworks og libararies:
+For this project the following libararies, frameworks and languages have been used:
 
 * [![Leaflet][Leaflet.js]][Leaflet-url]
 * [![React][React.js]][React-url]
@@ -54,40 +53,39 @@ Til dette projekt er der gjort brug af følgende frameworks og libararies:
 * [![Sass][Sass]][Sass-url]
 * [![Vite][Vite.js]][Vite-url]
 
-<p align="left">(<a href="#readme-top">Til Toppen</a>)</p>
+<p align="left">(<a href="#readme-top">To the Top</a>)</p>
 
 <!-- GETTING STARTED -->
-## Opstart
+### Prerequisites
 
-For at kunne køre applikationen som de Webudviklings studerende har lavet er der en række trin og krav der skal opfyldes før man kan få det op og køre. Dette involvere at downloade og opsætte nødvendige dependencies, samt skal der hvis man vil lave sin egen firebase collection sørges for man har en konto på firebase, og at man retter de informationer der står inde i config filen. 
-
-### Før du begynder
-
-For at applikationen kan køre korrekt skal der i config mappen i firebase.js filen tjekkes at den korrekte informaiton er opstillet. Når dette projekt bliver afleveret er de nødvendige informationer til firabase opsat på en af de webudviklings studerende. Hvis man ønsker at bruge denne applikation til eget brug, skal man derfor sørge for at man har en konto på firebase, og dermed ændre informationerne i firebase.js filen til det der tilhøre egen konto.
-
-Bemærk dette er kun hvis man selv ønsker adgang til firebase databasen direkte. 
+In order to be able to use the solution which the Webdevelopment students have created, you need to run a series of commands in the terminal. These are to insure the nessesary documents and dependencies are installed and working. If these are not correctly installed the solution will not be able to function as intenced. 
 
 ### Installation
 
-For at applikationen kan køre korrekt skal de følgende kommandoer køres i terminalen:
-* npm 
-  ```sh
-  npm install
-  ```
-Dette er for at installere alle de dependencies der er nævnt i package.json filen, og som derved er krav for at applikationen kan køre. 
+Before one can use the solution one must first ensure the nessesary dependencies have been installed, to do this you write the following command in the terminal:
+* npm
+ ```sh
+ npm install
+ ```
+This will install all the dependencies which are described in the package.json file. Once these are installed you then need to write the following command to setup the actual solution and thus make it "live"
+* npm
+ ```sh
+ npm run dev
+ ```
+This command will start up the application and will in the terminal also give a link which you can click to access the actual solution. 
 
-<p align="left">(<a href="#readme-top">Til Toppen</a>)</p>
+<p align="left">(<a href="#readme-top">To the Top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
-## Brug
+## Usage
 
-Dette projekt omahndler et geografisk kort og en audio player med historier, som kan bruges når man går rundt i Geografisk Have. Der er derved i dette projekt opsat et kort gennem leaflet, som med brug af geolocation viser hvor brugeren befinder sig. Derudover er der også lavet en tilhørende audio player, som kan afspille lydfilerne der tilhøre en given historie.
+This project is about a geografical map and story telling web page, which a visitor of the client Geografish Have Kolding can use while they are walking around in the garden. The map function of the product uses leaflet and a opensource map with geolocation to show the user their location. Moreover there is also a audio player with audiofiles for the given story the user is listening to. Both the map locations and the audiofile is connected to specified stories which the user can find on the landing page of product.
 
-<p align="left">(<a href="#readme-top">Til Toppen</a>)</p>
+<p align="left">(<a href="#readme-top">To the Top</a>)</p>
 
 <!-- CONTACT -->
-## Kontakt
-Nedenfor står kontakt opysningerne for de webudviklings studerende der har været en del af dette projekt:
+## Contact
+Below are the contact information fot the 4 Webdevelopment students which have been a part of this project:
 
 Emilie 
 <br>
@@ -112,27 +110,22 @@ Maria Dimon
 Email: mndi32110@edu.ucl.dk 
 <br>
 Github: (https://github.com/M-Dimon)
-<p align="left">(<a href="#readme-top">Til Toppen</a>)</p>
+<p align="left">(<a href="#readme-top">To the Top</a>)</p>
 
 
 
-<!-- Referances -->
-## Referencer
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+The following list contains resources which the team has found helpfull in the completion of the project, and the corresponding files in it. 
 
 * [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
 * [Img Shields](https://shields.io)
 * [GitHub Pages](https://pages.github.com)
 * [Font Awesome](https://fontawesome.com)
 * [React Icons](https://react-icons.github.io/react-icons/search)
 
-<p align="left">(<a href="#readme-top">Til Toppen</a>)</p>
-
-
+<p align="left">(<a href="#readme-top">To the Top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
