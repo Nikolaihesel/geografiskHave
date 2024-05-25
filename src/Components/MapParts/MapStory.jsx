@@ -1,39 +1,26 @@
 import React, { useState, useRef, useMemo, useCallback } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
-//scss
+// Components
+import Button from '@/Components/Button';
+// scss
 import inputStyle from '@/assets/styles/components/modules/Inputs/_inputs.module.scss';
-function MapStory({
-	markerLocations,
-	setMarkerLocations,
-	markerText,
-	setMarkerText,
-}) {
+
+function MapStory({ markerLocations, setMarkerLocations }) {
 	const [draggable, setDraggable] = useState(false);
 	const [position, setPosition] = useState({ lat: 55.4721, lng: 9.4929 });
+	const [currentMarkerText, setCurrentMarkerText] = useState('');
+	const [markerText, setMarkerText] = useState([]);
 	const markerRef = useRef(null);
-
-	const handleMarkerTextChange = (e) => {
-		setMarkerText(e.target.value);
-	};
 
 	const renderMarkerInputs = () => {
 		return markerLocations.map((location, index) => (
-			<div
-				className={inputStyle.inputContainer}
-				key={index}>
-				<label>Longitude</label>
-				<input
-					type='text'
-					value={location.lng}
-					onChange={(e) => handleMarkerLocationChange(e, index, 'lng')}
-				/>
-				<label>Latitude</label>
-				<input
-					type='text'
-					value={location.lat}
-					onChange={(e) => handleMarkerLocationChange(e, index, 'lat')}
-				/>
+			<div key={index}>
+				<p>Marker Text: {markerText[index]}</p>
+				<p>Longitude: {location.lng}</p>
+				<p>Latitude: {location.lat}</p>
+				<button onClick={() => removeLocation(index)}>X</button>
+				<hr />
 			</div>
 		));
 	};
@@ -43,17 +30,20 @@ function MapStory({
 			...markerLocations,
 			{ lat: position.lat.toFixed(6), lng: position.lng.toFixed(6) },
 		]);
+		setMarkerText([...markerText, currentMarkerText]);
+		setCurrentMarkerText('');
 	};
 
-	const handleMarkerLocationChange = (e, index, key) => {
-		const updatedLocations = [...markerLocations];
-		updatedLocations[index][key] = e.target.value;
-		setMarkerLocations(updatedLocations);
+	const removeLocation = (indexToRemove) => {
+		setMarkerLocations((prevLocation) =>
+			prevLocation.filter((_, index) => index !== indexToRemove)
+		);
 	};
 
 	const toggleDraggable = useCallback(() => {
 		setDraggable((d) => !d);
 	}, []);
+
 	const eventHandler = useMemo(
 		() => ({
 			dragend() {
@@ -68,14 +58,20 @@ function MapStory({
 
 	return (
 		<div className='map-wrapper'>
-			{renderMarkerInputs()}
+			<div
+				style={{
+					maxHeight: '100px',
+					overflow: 'auto',
+				}}>
+				{renderMarkerInputs()}
+			</div>
 			<div className={inputStyle.inputContainer}>
 				<label>Marker Text</label>
 				<input
 					type='text'
 					placeholder='Marker text'
-					value={markerText}
-					onChange={handleMarkerTextChange}
+					value={currentMarkerText}
+					onChange={(e) => setCurrentMarkerText(e.target.value)}
 				/>
 			</div>
 			<MapContainer
@@ -96,12 +92,16 @@ function MapStory({
 									: 'Click here to make marker draggable'}
 							</span>
 							<br />
-							{markerText}
+							{currentMarkerText}
 						</div>
 					</Popup>
 				</Marker>
 			</MapContainer>
-			<button onClick={addMarkerLocation}>Add Marker Location</button>
+			<Button
+				interact
+				onClick={addMarkerLocation}>
+				Add Marker Location
+			</Button>
 		</div>
 	);
 }

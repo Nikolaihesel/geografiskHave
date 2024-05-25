@@ -6,13 +6,14 @@ import {
 	faPlay,
 	faPause,
 } from '@fortawesome/free-solid-svg-icons';
+
 //Components
 import AudioPlayPart from '@/Components/AudioPlayPart/AudioPlayPart';
-
+import Button from '@/Components/Button';
 //Css
 import Component from '@/assets/styles/components/modules/MainAudioPlayer/main-audio-player.module.scss';
 
-function Audio({ audioFiles, currentIndex }) {
+function Audio({ audioFiles, currentIndex, Title }) {
 	const [currentAudioIndex, setCurrentAudioIndex] = useState(currentIndex);
 	const audioRef = useRef(null);
 	const [isPlaying, setIsPlaying] = useState(false);
@@ -69,7 +70,11 @@ function Audio({ audioFiles, currentIndex }) {
 		<div className={Component.audioWrapper}>
 			{popup && (
 				<div className='pop-up'>
-					<button onClick={() => setPopup(!popup)}>Use Audio</button>
+					<Button
+						interact
+						onClick={() => setPopup(!popup)}>
+						Use Audio
+					</Button>
 				</div>
 			)}
 			<audio
@@ -103,47 +108,31 @@ function Audio({ audioFiles, currentIndex }) {
 					alignItems: 'center',
 					gap: '1.5em',
 				}}>
-				<button
+				<FontAwesomeIcon
 					onClick={handlePrevious}
-					style={{
-						background: 'none',
-						border: 'none',
-					}}>
+					icon={faRotateLeft}
+					className={Component.audioControlButtons}
+				/>
+
+				{isPlaying && isPlaying ? (
 					<FontAwesomeIcon
-						icon={faRotateLeft}
+						onClick={handlePlayPause}
+						icon={faPause}
 						className={Component.audioControlButtons}
 					/>
-				</button>
-				<button
-					onClick={handlePlayPause}
-					style={{
-						background: 'none',
-						border: 'none',
-						touchAction: 'none',
-					}}>
-					{isPlaying && isPlaying ? (
-						<FontAwesomeIcon
-							icon={faPause}
-							className={Component.audioControlButtons}
-						/>
-					) : (
-						<FontAwesomeIcon
-							icon={faPlay}
-							className={Component.audioControlButtons}
-						/>
-					)}
-				</button>
-				<button
+				) : (
+					<FontAwesomeIcon
+						onClick={handlePlayPause}
+						icon={faPlay}
+						className={Component.audioControlButtons}
+					/>
+				)}
+
+				<FontAwesomeIcon
 					onClick={handleNext}
-					style={{
-						background: 'none',
-						border: 'none',
-					}}>
-					<FontAwesomeIcon
-						icon={faRotateRight}
-						className={Component.audioControlButtons}
-					/>
-				</button>
+					icon={faRotateRight}
+					className={Component.audioControlButtons}
+				/>
 			</div>
 			<input
 				type='range'
@@ -165,6 +154,7 @@ function Audio({ audioFiles, currentIndex }) {
 					<AudioPlayPart
 						Index={index}
 						audio={audio}
+						Title={Title}
 					/>
 				</div>
 			))}

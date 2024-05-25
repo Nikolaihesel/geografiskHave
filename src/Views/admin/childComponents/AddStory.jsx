@@ -7,14 +7,13 @@ import {
 } from 'firebase/storage';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '@/config/firebase';
-
 //Components
 import MapStory from '@/Components/MapParts/MapStory';
 import ToastSucces from '@/Components/Toast/ToastSucces';
+import Button from '@/Components/Button';
+import LabelAndInput from '@/Components/LabelAndInput';
 
 // CSS modules
-
-import inputStyle from '@/assets/styles/components/modules/Inputs/_inputs.module.scss';
 import Style from '@/assets/styles/components/modules/admin.module.scss';
 
 function AddStory() {
@@ -23,11 +22,10 @@ function AddStory() {
 	const [description, setDescription] = useState('');
 	const [file, setFile] = useState(null);
 	const [audio, setAudio] = useState([]);
-	const [progress, setProgress] = useState(0);
 	const storage = getStorage();
 	const [success, setSuccess] = useState(false);
 	// Map
-	const [markerText, setMarkerText] = useState('');
+	const [markerText, setMarkerText] = useState([]);
 	const [markerLocations, setMarkerLocations] = useState([]);
 
 	//
@@ -99,52 +97,48 @@ function AddStory() {
 			{success && <ToastSucces onDismiss={handleToastDismiss} />}
 			<form onSubmit={handleSubmit}>
 				<div className={Style.formWrap}>
-					<div className={inputStyle.inputContainer}>
-						<label>Title</label>
-						<input
-							type='text'
-							placeholder='Title'
-							value={title}
-							onChange={(e) => setTitle(e.target.value)}
-						/>
-					</div>
-					<div className={inputStyle.inputContainer}>
-						<label>Description</label>
-						<input
-							type='text'
-							placeholder='Description'
-							value={description}
-							onChange={(e) => setDescription(e.target.value)}
-						/>
-					</div>
-					<div className={inputStyle.inputContainer}>
-						<label>Upload Image</label>
-						<input
-							type='file'
-							onChange={handleChange}
-						/>
-					</div>
-				</div>
-
-				<div className={inputStyle.inputContainer}>
-					<label>Audio Files</label>
-					<input
-						type='file'
+					<LabelAndInput
+						labelText={'Title'}
+						value={title}
+						onChange={(e) => setTitle(e.target.value)}
+					/>
+					<LabelAndInput
+						labelText={'Description'}
+						value={description}
+						onChange={(e) => setDescription(e.target.value)}
+					/>
+					<LabelAndInput
+						labelText={'Upload Image'}
+						type={'file'}
+						onChange={handleChange}
+					/>
+					<LabelAndInput
+						labelText={'Upload Audiofile'}
+						type={'file'}
 						onChange={handleAudioChange}
 						multiple
 					/>
+
 					<ul>
 						{audio.map((audioFile, index) => (
 							<li key={index}>
 								{audioFile.name}
-								<button onClick={() => removeAudio(index)}>Remove</button>
+								<Button
+									interact
+									onClick={() => removeAudio(index)}>
+									Fjern
+								</Button>
 							</li>
 						))}
 					</ul>
 				</div>
 
 				<div className='form-inner-wrap-right'></div>
-				<button type='handleSubmit'>Create Story</button>
+				<Button
+					primary
+					type={'handleSubmit'}>
+					Opret Historie
+				</Button>
 			</form>
 
 			<MapStory

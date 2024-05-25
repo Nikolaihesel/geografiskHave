@@ -7,35 +7,42 @@ import { faSearch, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 // CSS modules
 import Style from '../assets/styles/components/modules/nav.module.scss';
 
+//images
+import Logo from '@/image/logo-white-mainheader.png';
+
 function Nav() {
 	const [nav, setNav] = useState(false);
 	const [showOplevSubMenu, setShowOplevSubMenu] = useState(false);
 	const [showGallerierSubMenu, setShowGallerierSubMenu] = useState(false);
 
+	// const handleBurgerClick = () => {
+	// 	setNav(!nav);
+	// 	if (!nav) {
+	// 		document.querySelectorAll(`.${Style.burger}`).forEach((burger, index) => {
+	// 			switch (index) {
+	// 				case 0:
+	// 					burger.style.transform = 'rotate(45deg) translate(5px, 5px)';
+	// 					break;
+	// 				case 1:
+	// 					burger.style.opacity = '0';
+	// 					break;
+	// 				case 2:
+	// 					burger.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+	// 					break;
+	// 				default:
+	// 					break;
+	// 			}
+	// 		});
+	// 	} else {
+	// 		document.querySelectorAll(`.${Style.burger}`).forEach((burger) => {
+	// 			burger.style.transform = '';
+	// 			burger.style.opacity = '';
+	// 		});
+	// 	}
+	// };
+
 	const handleBurgerClick = () => {
 		setNav(!nav);
-		if (!nav) {
-			document.querySelectorAll(`.${Style.burger}`).forEach((burger, index) => {
-				switch (index) {
-					case 0:
-						burger.style.transform = 'rotate(45deg) translate(5px, 5px)';
-						break;
-					case 1:
-						burger.style.opacity = '0';
-						break;
-					case 2:
-						burger.style.transform = 'rotate(-45deg) translate(7px, -6px)';
-						break;
-					default:
-						break;
-				}
-			});
-		} else {
-			document.querySelectorAll(`.${Style.burger}`).forEach((burger) => {
-				burger.style.transform = '';
-				burger.style.opacity = '';
-			});
-		}
 	};
 
 	const handleOplevHavenClick = () => {
@@ -50,11 +57,12 @@ function Nav() {
 		<nav>
 			<div className={Style.navContainer}>
 				<NavLink to='/'>
-					{' '}
-					{/* Wrap this line around the h1 tag */}
-					<h1>Geografisk Have</h1>
-				</NavLink>{' '}
-				{/* Close NavLink here */}
+					<img
+						style={{ height: '50px' }}
+						src={Logo}
+					/>
+				</NavLink>
+
 				<div className={Style.ticketIcon}>
 					<img
 						className={Style.ticketIconYellow}
@@ -62,10 +70,22 @@ function Nav() {
 						alt='Ticket Icon'
 					/>
 				</div>
-				<div className='search-icon'>
-					<FontAwesomeIcon icon={faSearch} />
+				<div className={Style.searchIcon}>
+					<FontAwesomeIcon
+						className={Style.searchIcon}
+						icon={faSearch}
+					/>
 				</div>
+
 				<div
+					className={`${Style.burgerMenu} ${nav ? Style.open : ''}`}
+					onClick={handleBurgerClick}>
+					<div className={Style.burger}></div>
+					<div className={Style.burger}></div>
+					<div className={Style.burger}></div>
+				</div>
+
+				{/* <div
 					onClick={handleBurgerClick}
 					className={Style.burgerMenu}>
 					<div
@@ -78,7 +98,7 @@ function Nav() {
 						className={`${Style.burger} ${
 							nav ? Style.rotateBottomRight : ''
 						}`}></div>
-				</div>
+				</div> */}
 			</div>
 			{nav && (
 				<div className={Style.navMenu}>

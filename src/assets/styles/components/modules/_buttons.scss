@@ -50,20 +50,42 @@
 	}
 }
 
-@mixin button {
-	margin: 1vw;
-	height: 5vh;
-	width: 20vw;
-	border-radius: 5%;
-	border: none;
-	position: relative;
-	font-size: 2vw;
-	font-weight: t.$semi-bold;
-}
+// @mixin button {
+// 	margin: 1vw;
+// 	height: 5vh;
+// 	width: 20vw;
+// 	border-radius: 5%;
+// 	border: none;
+// 	position: relative;
+// 	font-size: 2vw;
+// 	font-weight: t.$semi-bold;
+// }
 
 @mixin audio-interact-button {
 	color: v.$interactive-color;
 	cursor: pointer;
 	height: 35px;
-	margin-bottom: 1em;
+}
+
+@mixin interact-button {
+	color: v.$neutral-tint-100;
+	background: v.$interactive-color;
+	font-size: t.$paragraph;
+	width: 146px;
+	height: 44px;
+	border: none;
+	cursor: pointer;
+	border-radius: 9px;
+
+	&:hover {
+		background-color: v.$interactive-color-hover;
+	}
+}
+
+@mixin primary-button {
+	padding: 1em;
+	border-radius: 6px;
+	border: none;
+	cursor: pointer;
+	background-color: v.$accent-color;
 }

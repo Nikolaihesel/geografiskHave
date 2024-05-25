@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 
 import { DraggableMenu } from '../Components/DraggableMenu';
 
-function MapView() {
+function MapView({ Title }) {
 	const { storyId } = useParams();
 	const [storyDetails, setStoryDetails] = useState(null);
 	const [userLocation, setUserLocation] = useState([0, 0]);
@@ -74,6 +74,7 @@ function MapView() {
 				<DraggableMenu
 					currentIndex={currentIndex}
 					audioData={storyDetails.audio}
+					Title={storyDetails.title}
 				/>
 			)}
 		</div>

@@ -3,6 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/config/firebase';
 import { useAuth } from '@/Context/AuthContext.jsx';
+
+//Components
+import Button from '@/Components/Button';
+
+//scss
 import style from '@/assets/styles/components/modules/Inputs/_inputs.module.scss';
 
 function Auth() {
@@ -32,10 +37,6 @@ function Auth() {
 		}
 	};
 
-	const CheckLogIn = () => {
-		console.log('user:', user, 'Logged in?:', isLoggedIn);
-	};
-
 	return (
 		<div>
 			<div className={style.inputContainer}>
@@ -55,8 +56,8 @@ function Auth() {
 				/>
 			</div>
 
-			<button onClick={handleSignIn}> Sign In </button>
-			<button onClick={CheckLogIn}> Am I logged in? </button>
+			<Button onClick={handleSignIn}> Sign In </Button>
+
 			<br />
 		</div>
 	);

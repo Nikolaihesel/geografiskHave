@@ -1,15 +1,15 @@
 import React from 'react';
 
-//scss
-import Component from '@/assets/styles/components/modules/SingleMediaPlayer/single-media-player.module.scss';
+import Button from '@/Components/Button';
+import Styles from '@/assets/styles/components/modules/SingleMediaPlayer/single-media-player.module.scss';
 
-function AudioPlayPart({ Index, audio }) {
+function AudioPlayPart({ Index, audio, Title }) {
 	return (
-		<div className={Component.playerComponent}>
-			<span className={Component.playerComponentTitle}>
-				Geografisk Haves Historie - Del {Index + 1}
+		<div className={Styles.playerComponent}>
+			<span>
+				{Title} - Del {Index + 1}
 			</span>
-			<button className={Component.playerComponentButton}>
+			<Button playCenter>
 				<audio
 					controls
 					style={{ display: 'none' }}>
@@ -18,7 +18,7 @@ function AudioPlayPart({ Index, audio }) {
 						type='audio/mpeg'
 					/>
 				</audio>
-			</button>
+			</Button>
 		</div>
 	);
 }

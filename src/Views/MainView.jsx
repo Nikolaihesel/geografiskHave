@@ -1,9 +1,8 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+
 //components
 import IntroText from '../Components/IntroText';
 import Carousel from '../Components/Carousel';
-import MapView from './MapView';
 
 function MainView() {
 	return (

@@ -8,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 //components
 import MapStory from '@/Components/MapParts/MapStory';
+import LabelAndInput from '@/Components/LabelAndInput';
+import Button from '@/Components/Button';
 
 //css modules
 import inputStyle from '@/assets/styles/components/modules/Inputs/_inputs.module.scss';
@@ -124,45 +126,35 @@ function UpdateStory() {
 			</NavLink>
 			<div className={Style.addStoryWrapper}>
 				<form onSubmit={submitStory}>
-					{/* Form inputs */}
 					<div className='form-inner-wrap-left'>
-						<div className={inputStyle.inputContainer}>
-							<label>Title</label>
-							<input
-								type='text'
-								placeholder='Title'
-								value={title}
-								onChange={(e) => setTitle(e.target.value)}
-							/>
-						</div>
-						<div className={inputStyle.inputContainer}>
-							<label>Description</label>
-							<input
-								type='text'
-								placeholder='Description'
-								value={description}
-								onChange={(e) => setDescription(e.target.value)}
-							/>
-						</div>
-						<div className={inputStyle.inputContainer}>
-							<label>Upload Image</label>
-							<input
-								type='file'
-								onChange={handleImageChange}
-							/>
-						</div>
+						<LabelAndInput
+							labelText={'Title'}
+							value={title}
+							onChange={(e) => setTitle(e.target.value)}
+						/>
+						<LabelAndInput
+							labelText={'Description'}
+							value={description}
+							onChange={(e) => setDescription(e.target.value)}
+						/>
+						<LabelAndInput
+							labelText={'Upload Image'}
+							type={'file'}
+							onChange={handleImageChange}
+						/>
 					</div>
-					<div className='form-inner-wrap-middle'>
-						<div className={inputStyle.inputContainer}>
-							<label>Audio Files</label>
-							<input
-								type='file'
-								multiple
-								onChange={handleAudioChange}
-							/>
-						</div>
-					</div>
-					<button type='submit'>Update Story</button>
+					<LabelAndInput
+						labelText={'Upload Audiofile'}
+						type={'file'}
+						onChange={handleAudioChange}
+						multiple
+					/>
+
+					<Button
+						interact
+						type='submit'>
+						Update Story
+					</Button>
 				</form>
 
 				<div className='map-wrapper'>

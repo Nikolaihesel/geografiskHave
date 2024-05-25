@@ -1,6 +1,9 @@
 import React from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 
+//components
+import Button from '@/Components/Button';
+
 // CSS modules
 import Style from '../../assets/styles/components/modules/admin.module.scss';
 
@@ -14,11 +17,11 @@ function Admin() {
 			}}>
 			<div className={Style.btnContainer}>
 				<NavLink to='/admin'>
-					<button className={Style.adminPanel}>Admin Panel</button>
+					<Button primary>Admin Panel</Button>
 				</NavLink>
 				<br />
 				<NavLink to='addstory'>
-					<button className={Style.addStory}>Tilføj Historie</button>
+					<Button primary> Tilføj Historie </Button>
 				</NavLink>
 			</div>
 

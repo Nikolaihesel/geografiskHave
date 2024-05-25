@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import Audio from './Audio';
 import Style from '../assets/styles/components/modules/draggable.module.scss';
 
-function DraggableMenu({ audioData, currentIndex }) {
+function DraggableMenu({ audioData, currentIndex, Title }) {
 	const [footerPosition, setFooterPosition] = useState({ x: 0, y: 0 });
 	const [dragging, setDragging] = useState(false);
 	const [startY, setStartY] = useState(0);
@@ -67,6 +67,7 @@ function DraggableMenu({ audioData, currentIndex }) {
 					<Audio
 						audioFiles={audioData}
 						currentIndex={currentIndex}
+						Title={Title}
 					/>
 				</div>
 			</div>

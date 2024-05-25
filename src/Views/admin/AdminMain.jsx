@@ -3,6 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { db } from '../../config/firebase';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 
+//Components
+import Button from '@/Components/Button';
+
 // CSS modules
 import Style from '../../assets/styles/components/modules/admin.module.scss';
 
@@ -53,11 +56,11 @@ function AdminMain() {
 					<br />
 					Tryk på en historie for at slette
 				</p>
-				<button
-					className={Style.deleteButton}
+				<Button
+					interact
 					onClick={() => handleDelete(storyId.id)}>
 					Slet Historie
-				</button>
+				</Button>
 			</div>
 
 			{stories.map((story, index) => (

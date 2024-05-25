@@ -54,7 +54,7 @@
   gap: 1em;
   flex-wrap: no-wrap;
   background: #136031;
-  min-height: 50px;
+  min-height: 55px;
 }
 .navContainer h1 {
   font-family: "ibm plex serif", sans-serif;
@@ -78,6 +78,8 @@
   background-color: #fee174;
   text-align: center;
   height: 100%;
+  max-width: 60px;
+  margin: 0 0.2em;
 }
 .ticketIcon .ticketIconYellow {
   padding: 0.5em;
@@ -89,29 +91,30 @@ svg {
 }
 
 .burgerMenu {
-  position: absolute;
-  z-index: 3;
-  right: 20px;
-  top: 20px;
+  width: 30px;
+  height: 24px;
+  margin-right: 4px;
   cursor: pointer;
-  transition: all 0.5s ease-out;
 }
 .burgerMenu .burger {
-  height: 3px;
   width: 20px;
-  margin: 0 0 5px 0;
-  position: relative;
-  background: #fff;
-  transition: all 0.5s ease-out;
+  height: 3.5px;
+  margin: 0.2em;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
 }
-.burgerMenu .rotate-top-right {
-  transform: rotate(45deg) translate(5px, 5px);
+.burgerMenu .burger:nth-child(3) {
+  transform: translate(0, -1.5px);
 }
-.burgerMenu .opacity-zero {
+.burgerMenu.open .burger:nth-child(1) {
+  transform: rotate(45deg) translate(3px, 5px);
+}
+.burgerMenu.open .burger:nth-child(2) {
   opacity: 0;
 }
-.burgerMenu .rotate-bottom-right {
-  transform: rotate(-45deg) translate(7px, -6px);
+.burgerMenu.open .burger:nth-child(3) {
+  transform: rotate(-45deg) translate(4px, -6px);
 }
 
 .navMenu {
@@ -161,4 +164,8 @@ svg {
   color: #000;
   margin-left: 8px;
   padding: 0 1em;
+}
+
+.searchIcon {
+  height: 20px;
 }/*# sourceMappingURL=nav.module.css.map */

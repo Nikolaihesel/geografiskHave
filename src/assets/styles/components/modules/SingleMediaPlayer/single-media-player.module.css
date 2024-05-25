@@ -51,34 +51,10 @@
   overflow: auto;
   width: 100%;
 }
-
-.playerComponentTitle {
+.playerComponent span {
   font-family: "open sans", sans-serif;
   font-size: 14px;
   font-weight: 600;
   color: #000;
   flex-grow: 1;
-}
-
-.playerComponentButton {
-  height: 60px;
-  width: 60px;
-  border-radius: 50%;
-  border: none;
-  background: #f3a25a;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1803921569);
-  position: relative;
-}
-.playerComponentButton::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-45%, -50%);
-  width: 0;
-  height: 0;
-  border-top: 12px solid transparent;
-  border-bottom: 12px solid transparent;
-  border-left: 25px solid white;
-  background-size: contain;
 }/*# sourceMappingURL=single-media-player.module.css.map */
