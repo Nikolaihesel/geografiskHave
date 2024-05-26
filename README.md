@@ -95,19 +95,19 @@ Below are the contact information fot the 4 Webdevelopment students which have b
 
 Emilie 
 <br>
-Email:
+Email: ebha38482@edu.ucl.dk
 <br>
 Github: (https://github.com/Reitc)
 
-Nikolaj 
+Nikolaj Hesel Jørgensen 
 <br>
-Email:
+Email: nhjo32218@edu.ucl.dk 
 <br>
 Github: (https://github.com/Nikolaihesel)
 
-Nicole 
+Nicole le Fevre
 <br>
-Email:
+Email: nile28346@edu.ucl.dk
 <br>
 Github: (https://github.com/nicolelefevre98)
 
