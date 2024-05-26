@@ -44,6 +44,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .timeIndicator {
@@ -83,4 +84,17 @@
   border-radius: 50%;
   border: #adadad;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1803921569);
+}
+
+.modal {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7058823529);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1em;
+  border-radius: 8px;
+  z-index: 10004;
 }/*# sourceMappingURL=main-audio-player.module.css.map */

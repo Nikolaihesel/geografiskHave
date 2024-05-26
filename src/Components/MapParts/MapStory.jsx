@@ -6,11 +6,16 @@ import Button from '@/Components/Button';
 // scss
 import inputStyle from '@/assets/styles/components/modules/Inputs/_inputs.module.scss';
 
-function MapStory({ markerLocations, setMarkerLocations }) {
+function MapStory({
+	markerLocations,
+	setMarkerLocations,
+	markerText,
+	setMarkerText,
+}) {
 	const [draggable, setDraggable] = useState(false);
 	const [position, setPosition] = useState({ lat: 55.4721, lng: 9.4929 });
 	const [currentMarkerText, setCurrentMarkerText] = useState('');
-	const [markerText, setMarkerText] = useState([]);
+
 	const markerRef = useRef(null);
 
 	const renderMarkerInputs = () => {

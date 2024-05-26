@@ -8,6 +8,7 @@ const Button = ({
 	disabled,
 	playOffCenter,
 	playCenter,
+	pauseCenter,
 	audioInteract,
 	interact,
 	primary,
@@ -21,6 +22,7 @@ const Button = ({
 		{
 			[styles.playButtonOffCenter]: playOffCenter,
 			[styles.playButtonCenter]: playCenter,
+			[styles.pauseButtonCenter]: pauseCenter,
 			[styles.audioInteractButton]: audioInteract,
 			[styles.interactButton]: interact,
 			[styles.primaryButton]: primary,

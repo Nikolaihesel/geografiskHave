@@ -89,3 +89,33 @@
 	cursor: pointer;
 	background-color: v.$accent-color;
 }
+
+@mixin pause-button-center {
+	height: 60px;
+	width: 60px;
+	border-radius: 50%;
+	border: none;
+	background: v.$interactive-color;
+
+	box-shadow: v.$drop-shadow;
+	position: relative;
+
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		top: 30%;
+
+		width: 8px;
+		height: 25px;
+		background: white;
+	}
+
+	&::before {
+		left: 33%;
+	}
+
+	&::after {
+		left: 53%;
+	}
+}

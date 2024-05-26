@@ -8,6 +8,10 @@
 	@include b.play-button-center;
 }
 
+.pauseButtonCenter {
+	@include b.pause-button-center;
+}
+
 .audioInteractButton {
 	@include b.audio-interact-button;
 }

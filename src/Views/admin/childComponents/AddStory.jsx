@@ -80,6 +80,7 @@ function AddStory() {
 				audio: audioURLs,
 				markerText,
 				markerLocations,
+				createdAt: new Date(),
 			});
 
 			setSuccess(true);

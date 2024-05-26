@@ -7,10 +7,10 @@ import {
 	faPause,
 } from '@fortawesome/free-solid-svg-icons';
 
-//Components
+// Components
 import AudioPlayPart from '@/Components/AudioPlayPart/AudioPlayPart';
-import Button from '@/Components/Button';
-//Css
+import AudioModal from '@/Components/AudioModal/AudioModal';
+// CSS
 import Component from '@/assets/styles/components/modules/MainAudioPlayer/main-audio-player.module.scss';
 
 function Audio({ audioFiles, currentIndex, Title }) {
@@ -24,9 +24,6 @@ function Audio({ audioFiles, currentIndex, Title }) {
 	useEffect(() => {
 		if (audioRef.current) {
 			audioRef.current.load();
-			// audioRef.current.play(); Autoplay not okay in some browsers so we will not use it
-		} else {
-			audioRef.current.pause();
 		}
 	}, [currentAudioIndex]);
 
@@ -47,15 +44,17 @@ function Audio({ audioFiles, currentIndex, Title }) {
 		}
 		setIsPlaying(!isPlaying);
 	};
+
 	const handleNext = () => {
 		setCurrentAudioIndex((prevIndex) => (prevIndex + 1) % audioFiles.length);
-		setIsPlaying(true);
+		setIsPlaying(true); // Set to play the next audio automatically
 	};
 
 	const handlePrevious = () => {
 		setCurrentAudioIndex(
 			(prevIndex) => (prevIndex - 1 + audioFiles.length) % audioFiles.length
 		);
+		setIsPlaying(true); // Set to play the previous audio automatically
 	};
 
 	const handleTimeUpdate = () => {
@@ -69,13 +68,10 @@ function Audio({ audioFiles, currentIndex, Title }) {
 	return (
 		<div className={Component.audioWrapper}>
 			{popup && (
-				<div className='pop-up'>
-					<Button
-						interact
-						onClick={() => setPopup(!popup)}>
-						Use Audio
-					</Button>
-				</div>
+				<AudioModal
+					popup={popup}
+					setPopup={setPopup}
+				/>
 			)}
 			<audio
 				ref={audioRef}
@@ -84,7 +80,7 @@ function Audio({ audioFiles, currentIndex, Title }) {
 				onEnded={handleNext}
 				src={audioFiles[currentAudioIndex]}></audio>
 			<p style={{ padding: '1em' }}>
-				currently playing: {currentAudioIndex + 1} / {audioFiles.length}
+				Currently playing: {currentAudioIndex + 1} / {audioFiles.length}
 			</p>
 
 			<div className={Component.timeIndicator}>
@@ -113,21 +109,11 @@ function Audio({ audioFiles, currentIndex, Title }) {
 					icon={faRotateLeft}
 					className={Component.audioControlButtons}
 				/>
-
-				{isPlaying && isPlaying ? (
-					<FontAwesomeIcon
-						onClick={handlePlayPause}
-						icon={faPause}
-						className={Component.audioControlButtons}
-					/>
-				) : (
-					<FontAwesomeIcon
-						onClick={handlePlayPause}
-						icon={faPlay}
-						className={Component.audioControlButtons}
-					/>
-				)}
-
+				<FontAwesomeIcon
+					onClick={handlePlayPause}
+					icon={isPlaying ? faPause : faPlay}
+					className={Component.audioControlButtons}
+				/>
 				<FontAwesomeIcon
 					onClick={handleNext}
 					icon={faRotateRight}
@@ -155,6 +141,7 @@ function Audio({ audioFiles, currentIndex, Title }) {
 						Index={index}
 						audio={audio}
 						Title={Title}
+						currentAudioIndex={currentAudioIndex}
 					/>
 				</div>
 			))}

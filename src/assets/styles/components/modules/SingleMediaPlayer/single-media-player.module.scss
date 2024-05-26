@@ -9,10 +9,9 @@
 	padding: 1em 2em;
 	border-radius: 2px;
 	background-color: v.$neutral-tint-10;
-
 	box-shadow: v.$drop-shadow;
 	overflow: auto;
-	width: 100%;
+	width: 90vw;
 
 	span {
 		@include t.semibold-paragraph;

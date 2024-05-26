@@ -62,7 +62,7 @@ function MapView({ Title }) {
 						<Marker
 							key={index}
 							position={location}>
-							<Popup>{storyDetails.title}</Popup>
+							<Popup>{storyDetails.markerText[index]}</Popup>
 						</Marker>
 					))}
 				<Marker position={userLocation}>
