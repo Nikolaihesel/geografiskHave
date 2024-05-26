@@ -31,7 +31,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](link to project page)
+[![Product Name Screen Shot][product-screenshot]][page-link]
 
 This project is a part of the final exam for the Modern Frontend Development class, for the seccond semester of the webdevelopment course at UCL Erhvervsakademi & Professionshøjskole in Odense. 
 
@@ -75,6 +75,12 @@ This will install all the dependencies which are described in the package.json f
 This command will start up the application and will in the terminal also give a link which you can click to access the actual solution. 
 
 <p align="left">(<a href="#readme-top">To the Top</a>)</p>
+
+### Admin Panel
+
+To create more depth for the project the team has designed and created a Admin Panel, where the owerns will be able to add, update and delete the stories for the story telling service. 
+
+In order to access the admin panel, you add /admin in the address path, once on the site you the need to login to get access, this is to secure the admin panel. For the login one needs the Email and Password. 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -131,7 +137,8 @@ The following list contains resources which the team has found helpfull in the c
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
 [contributors-url]: https://github.com/Nikolaihesel/geografiskHave/graphs/contributors
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: src/image/geografisk_have_preview.PNG
+[page-link]: https://geografiskhave-17f07.web.app/?fbclid=IwZXh0bgNhZW0CMTAAAR3ty2jbaiAWek1g4ZnTpT55cq3iWXDTBIMjbOOyeQ_pKJGfNT8Pl5JbU6U_aem_Ac8vtD8vFvOvLM0kPRtJlGdHtCb3TFJw3Tgz2SHKr7dfOk2n9tCZnxW4upyMe9EJ6lNR9jbjOGQWfinxhP6HPJKe
 [Leaflet.js]: https://img.shields.io/badge/Leaflet-199900?style=for-the-badge&logo=Leaflet
 [Leaflet-url]: https://leafletjs.com/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
