@@ -46,8 +46,6 @@ npm install
 npm run dev
 ```
 
-<p align="left">(<a href="#readme-top">To the Top</a>)</p>
-
 ### Built With
 
 For this project the following libararies, frameworks and languages have been used:
@@ -65,8 +63,6 @@ For this project the following libararies, frameworks and languages have been us
 <h1> The admin panel can be accessed through /admin at the end of the url, and is build for desktop. </h1>
 
 <!-- USAGE EXAMPLES -->
-
-<p align="left">(<a href="#readme-top">To the Top</a>)</p>
 
 <!-- CONTACT -->
 
@@ -96,8 +92,6 @@ Email: mndi32110@edu.ucl.dk
 <br>
 Github: (https://github.com/M-Dimon)
 
-<p align="left">(<a href="#readme-top">To the Top</a>)</p>
-
 <!-- ACKNOWLEDGMENTS -->
 
 ## Acknowledgments
@@ -110,7 +104,7 @@ The following list contains resources which the team has found helpfull in the c
 - [Font Awesome](https://fontawesome.com)
 - [React Icons](https://react-icons.github.io/react-icons/search)
 
-<p align="left">(<a href="#readme-top">To the Top</a>)</p>
+<p align="right">(<a href="#readme-top">To the Top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
