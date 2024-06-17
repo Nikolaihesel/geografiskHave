@@ -1,0 +1,46 @@
+{
+  "short_name": "Geografisk Have",
+  "name": "Geografisk Have Kolding - Fortæller",
+  "description": "En interaktiv guide og lydoplevelse af Geografisk Have i Kolding.",
+  "lang": "da",
+  "start_url": "/?utm_source=homescreen",
+  "background_color": "#FFFFFF",
+  "theme_color": "#136031",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/src/image/billetIcon.svg",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/src/image/search.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/src/image/maskable_icon.png",
+      "sizes": "196x196",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/src/image/screenshots/homepage.webp",
+      "sizes": "640x480",
+      "type": "image/webp",
+      "label": "Forside med titel og billedkarussel"
+    },
+    {
+      "src": "/src/image/screenshots/map.webp",
+      "sizes": "640x480",
+      "type": "image/webp",
+      "label": "Kort med lydafspiller"
+    }
+  ],
+  "categories": ["education", "entertainment", "lifestyle"],
+  "prefer_related_applications": false
+}
