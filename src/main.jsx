@@ -23,20 +23,21 @@ if ('serviceWorker' in navigator) {
 }
 
 // Tilføjelse til Hjemskærm Prompt
+// Brugeren kan tilføje appen til hjemskærmen, nemmere adgang til appen.
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
-  // Prevent the mini-infobar from appearing on mobile
+  // Undgå, at prompten vises automatisk
   e.preventDefault();
   // Stash the event so it can be triggered later.
   deferredPrompt = e;
 
-  // Update UI notify the user they can add to home screen
+  // Opdater UI for at informere brugeren om, at de kan tilføje til hjemskærmen
   showAddToHomeScreen();
 });
 
 function showAddToHomeScreen() {
-  // Show the add to home screen button
+  // Vis add to home screen knappen
   const addToHomeScreenButton = document.querySelector('.add-to-home-screen-button');
   addToHomeScreenButton.style.display = 'block';
 
@@ -44,14 +45,14 @@ function showAddToHomeScreen() {
 }
 
 function addToHomeScreen() {
-  // Hide the add to home screen button
+  // Gem add to home screen knappen
   const addToHomeScreenButton = document.querySelector('.add-to-home-screen-button');
   addToHomeScreenButton.style.display = 'none';
 
-  // Show the prompt
+  // vis prompten
   deferredPrompt.prompt();
 
-  // Wait for the user to respond to the prompt
+  // Vent på brugerens respons
   deferredPrompt.userChoice.then((choiceResult) => {
     if (choiceResult.outcome === 'accepted') {
       console.log('User accepted the A2HS prompt');

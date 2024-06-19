@@ -1,7 +1,7 @@
 {
   "short_name": "Geografisk Have",
-  "name": "Geografisk Have Kolding - Fortæller",
-  "description": "En interaktiv guide og lydoplevelse af Geografisk Have i Kolding.",
+  "name": "Geografisk Have Kolding - Geografisk Have Fortæller",
+  "description": "En interaktiv fortællingsplatform, til dig der elsker at gå på eventyr, og udforske de mange vidundre i Geografisk have",
   "lang": "da",
   "start_url": "/?utm_source=homescreen",
   "background_color": "#FFFFFF",
@@ -41,6 +41,6 @@
       "label": "Kort med lydafspiller"
     }
   ],
-  "categories": ["education", "entertainment", "lifestyle"],
+  "categories": ["education", "entertainment", "lifestyle", "tourism", "storytelling"],
   "prefer_related_applications": false
 }

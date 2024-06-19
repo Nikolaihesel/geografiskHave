@@ -8,7 +8,7 @@ const urlsToCache = [
   '/images/icons/icon-192x192.png',
   '/images/icons/icon-512x512.png'
 ];
-
+// Installere service worker og cache filer, sikre appen er tilgængelig offline.
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -17,7 +17,7 @@ self.addEventListener('install', event => {
       })
   );
 });
-
+// Leder først i cache efter filen, hvis ikke fundet hentes filen fra serveren.
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
