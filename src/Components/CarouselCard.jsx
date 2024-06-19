@@ -14,7 +14,7 @@ function CarouselCard({ StoryImg, ImgAlt, StoryTitle, StoryId }) {
 				alt={ImgAlt}
 			/>
 			<p>{StoryTitle}</p>
-			<NavLink to={`/map/${StoryId}`}>
+			<NavLink to={`/map/${StoryId}`} >
 				<Button playOffCenter></Button>
 			</NavLink>
 		</div>

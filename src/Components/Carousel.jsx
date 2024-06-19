@@ -78,6 +78,7 @@ function Carousel() {
 							StoryImg={story.image}
 							StoryTitle={story.title}
 							StoryId={story.id} // Pass the story ID here
+							aria-label={`Story ${index + 1}`}
 						/>
 					</div>
 				))}

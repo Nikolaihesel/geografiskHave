@@ -60,6 +60,8 @@ function Nav() {
 					<img
 						style={{ height: '50px' }}
 						src={Logo}
+						alt="Geografisk Have Logo"
+						aria-label='Geografisk Have Logo - link to home page'
 					/>
 				</NavLink>
 
@@ -67,13 +69,16 @@ function Nav() {
 					<img
 						className={Style.ticketIconYellow}
 						src={ticketIcon}
-						alt='Ticket Icon'
+						alt="Ticket Icon"
+						aria-label='Ticket Icon - link to ticket page'
 					/>
 				</div>
 				<div className={Style.searchIcon}>
 					<FontAwesomeIcon
 						className={Style.searchIcon}
 						icon={faSearch}
+						alt="Search Icon"
+						aria-label='Search Icon - search bar'
 					/>
 				</div>
 

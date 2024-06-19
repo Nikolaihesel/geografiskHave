@@ -35,6 +35,7 @@ const Button = ({
 			className={buttonClass}
 			onClick={onClick}
 			disabled={disabled}
+			aria-label='Play Button'
 			style={style}
 			{...props}>
 			{children || text}
