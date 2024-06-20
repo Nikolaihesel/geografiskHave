@@ -29,13 +29,13 @@
   ],
   "screenshots": [
     {
-      "src": "/src/image/screenshots/homepage.webp",
+      "src": "/src/image/forside.png",
       "sizes": "640x480",
       "type": "image/webp",
       "label": "Forside med titel og billedkarussel"
     },
     {
-      "src": "/src/image/screenshots/map.webp",
+      "src": "/src/image/map.png",
       "sizes": "640x480",
       "type": "image/webp",
       "label": "Kort med lydafspiller"
